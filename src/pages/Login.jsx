@@ -7,16 +7,30 @@ export const Login = () => {
         <div className="login-section">
           <div className="login-page__form">
             <form>
-              <input type="email" name="" id="accout" placeholder="Email...." />
-              <input
-                type="password"
-                name=""
-                id="password"
-                placeholder="Password...."
-              />
-              <input type="checkbox" /> Remeber me
+              <h1>
+                Hello,
+                <br />
+                Welcome Back
+              </h1>
+              <p>Hey,welcome back to your fitness space</p>
+              {/* Email */}
+              <input type="email" id="accout" placeholder="Email...." />
+              {/* Password */}
+              <input type="password" id="password" placeholder="Password...." />
+              {/* Remember me + Forgot password */}
+              <div className="form-options">
+                <label>
+                  <input type="checkbox" />
+                  Remember me
+                </label>
+                <a href="#">Forgot Password?</a>
+              </div>
+              <a href="#">Foreget Password?</a>
               <button type="submit">Sign In</button>
             </form>
+            <p className="signup-link">
+              Don't have an accout?<a href="#">Sign Up</a>
+            </p>
           </div>
           <div className="login-page__image">
             <img src="/assets/Login.png" alt="Login" />
