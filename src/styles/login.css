@@ -1,0 +1,47 @@
+.login-wrapper {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f9f9f9;
+}
+
+.login-page {
+  height: 90vh;
+  width: 80%;
+  background-color: lightgray;
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login-page .login-section {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+.login-page .login-section .login-page__form {
+  flex: 1;
+  padding: 2rem;
+}
+.login-page .login-section .login-page__form form {
+  display: flex;
+  flex-direction: column;
+}
+.login-page .login-section .login-page__image {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  height: 100%;
+  width: 100%;
+}
+.login-page .login-section .login-page__image img {
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}/*# sourceMappingURL=login.css.map */
