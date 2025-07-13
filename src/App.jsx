@@ -29,7 +29,7 @@ const App = () => {
             element={user ? <Dashboard /> : <Navigate to="/login" />}
           />
           {/* 預設的路由是登入的畫面 */}
-          <Route path="/" element={<Navigate to="/login" />} />
+          <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
       </BrowserRouter>
     </div>
