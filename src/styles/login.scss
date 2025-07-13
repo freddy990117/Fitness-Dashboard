@@ -27,6 +27,7 @@
         justify-content: space-evenly;
         text-align: start;
         form {
+          position: relative;
           flex: 9;
           display: flex;
           flex-direction: column;
@@ -72,8 +73,18 @@
               color: #85c8ff;
             }
           }
+          .error-message {
+            color: #e74c3c;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            animation-name: error-message;
+            animation-duration: 2s;
+            animation-iteration-count: 3;
+            animation-timing-function: ease-in-out;
+          }
           button {
-            margin-top: 1rem;
+            position: absolute;
+            top: 100%;
             padding: 1rem;
             background-color: #4f9cf9;
             color: white;
@@ -87,6 +98,7 @@
           }
         }
         .signup-link {
+          margin-top: 11rem;
           flex: 1;
           width: 80%;
           a {
@@ -111,5 +123,15 @@
         }
       }
     }
+  }
+}
+
+@keyframes error-message {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
   }
 }
