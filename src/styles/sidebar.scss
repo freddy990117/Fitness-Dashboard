@@ -1,0 +1,21 @@
+.sidebar-wrapper {
+  .sidebar-header {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding: 1rem;
+    img {
+      width: 30%;
+      border-radius: 50%;
+    }
+    h2 {
+      margin-left: 1rem;
+    }
+  }
+  .sidebar-menu {
+    h3 {
+      a {
+      }
+    }
+  }
+}

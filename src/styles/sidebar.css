@@ -1,0 +1,13 @@
+.sidebar-wrapper .sidebar-header {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 1rem;
+}
+.sidebar-wrapper .sidebar-header img {
+  width: 30%;
+  border-radius: 50%;
+}
+.sidebar-wrapper .sidebar-header h2 {
+  margin-left: 1rem;
+}/*# sourceMappingURL=sidebar.css.map */

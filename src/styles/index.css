@@ -17,7 +17,7 @@ body .dashboard-page {
 }
 body .dashboard-page .sidebar {
   background-color: lightblue;
-  flex: 1;
+  flex: 1.5;
 }
 body .dashboard-page .card {
   background-color: lightcyan;

@@ -1,5 +1,5 @@
 import React from "react";
-
+import "../styles/sidebar.css";
 const Sidebar = () => {
   return (
     <div className="sidebar-wrapper">
@@ -21,7 +21,7 @@ const Sidebar = () => {
           <a href="#">Setting (Under Development)</a>
         </h3>
         <h3>
-          <a href="#">Layout (Under Development)</a>
+          <a href="#">Layout</a>
         </h3>
       </div>
     </div>
