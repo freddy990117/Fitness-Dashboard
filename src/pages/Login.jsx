@@ -7,6 +7,7 @@ export const Login = () => {
         <div className="login-section">
           <div className="login-page__form">
             <form>
+              <h2>🧑‍💻 Freddy</h2>
               <h1>
                 Hello,
                 <br />
@@ -25,7 +26,6 @@ export const Login = () => {
                 </label>
                 <a href="#">Forgot Password?</a>
               </div>
-              <a href="#">Foreget Password?</a>
               <button type="submit">Sign In</button>
             </form>
             <p className="signup-link">

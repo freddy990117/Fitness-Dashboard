@@ -4,43 +4,115 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f9f9f9;
-}
-
-.login-page {
-  height: 90vh;
-  width: 80%;
   background-color: lightgray;
+}
+.login-wrapper .login-page {
+  background-color: #f9f9f9;
+  height: 90vh;
+  width: 60%;
   border: 1px solid black;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.login-page .login-section {
+.login-wrapper .login-page .login-section {
   display: flex;
   height: 100%;
   width: 100%;
 }
-.login-page .login-section .login-page__form {
+.login-wrapper .login-page .login-section .login-page__form {
   flex: 1;
   padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  text-align: start;
 }
-.login-page .login-section .login-page__form form {
+.login-wrapper .login-page .login-section .login-page__form form {
+  flex: 9;
   display: flex;
   flex-direction: column;
 }
-.login-page .login-section .login-page__image {
+.login-wrapper .login-page .login-section .login-page__form form h2 {
+  margin-bottom: 3rem;
+}
+.login-wrapper .login-page .login-section .login-page__form form h1 {
+  color: #2d2d2d;
+  font-size: 3rem;
+}
+.login-wrapper .login-page .login-section .login-page__form form p {
+  color: #888;
+  margin: 0.5rem 0 3rem 0;
+}
+.login-wrapper .login-page .login-section .login-page__form form input {
+  padding: 1rem;
+  font-size: 1.3rem;
+  margin: 0.3rem 0;
+}
+.login-wrapper .login-page .login-section .login-page__form form input::-moz-placeholder {
+  color: #aaa;
+}
+.login-wrapper .login-page .login-section .login-page__form form input::placeholder {
+  color: #aaa;
+}
+.login-wrapper .login-page .login-section .login-page__form form input:focus {
+  border: 1px solid #4f9cf9;
+}
+.login-wrapper .login-page .login-section .login-page__form form .form-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+}
+.login-wrapper .login-page .login-section .login-page__form form .form-options label {
+  display: flex;
+  align-content: center;
+  gap: 0.2rem;
+}
+.login-wrapper .login-page .login-section .login-page__form form .form-options input[type=checkbox] {
+  accent-color: #4f9cf9;
+  width: 13px;
+  height: 13px;
+}
+.login-wrapper .login-page .login-section .login-page__form form .form-options a {
+  text-decoration: none;
+  color: #85c8ff;
+}
+.login-wrapper .login-page .login-section .login-page__form form button {
+  margin-top: 5rem;
+  padding: 1rem;
+  background-color: #4f9cf9;
+  color: white;
+  border: none;
+  width: 40%;
+  border-radius: 10px;
+  font-size: 1rem;
+}
+.login-wrapper .login-page .login-section .login-page__form form button:hover {
+  background-color: #3c8ce3;
+}
+.login-wrapper .login-page .login-section .login-page__form .signup-link {
   flex: 1;
+  width: 80%;
+}
+.login-wrapper .login-page .login-section .login-page__form .signup-link a {
+  text-decoration: none;
+  color: #85c8ff;
+  font-weight: 800;
+  margin-left: 0.2rem;
+}
+.login-wrapper .login-page .login-section .login-page__image {
+  flex: 1.5;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 2rem;
-  height: 100%;
-  width: 100%;
 }
-.login-page .login-section .login-page__image img {
+.login-wrapper .login-page .login-section .login-page__image img {
+  border-radius: 10px;
   width: 100%;
-  height: auto;
   max-height: 100%;
   -o-object-fit: cover;
      object-fit: cover;

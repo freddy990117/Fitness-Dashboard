@@ -4,42 +4,111 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f9f9f9;
-}
-
-.login-page {
-  height: 90vh;
-  width: 80%;
   background-color: lightgray;
-  border: 1px solid black;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  .login-section {
+  .login-page {
+    background-color: #f9f9f9;
+    height: 90vh;
+    width: 60%;
+    border: 1px solid black;
+    border-radius: 10px;
     display: flex;
-    height: 100%;
-    width: 100%;
-    .login-page__form {
-      flex: 1;
-      padding: 2rem;
-      form {
-        display: flex;
-        flex-direction: column;
-      }
-    }
-    .login-page__image {
-      flex: 1;
+    align-items: center;
+    justify-content: center;
+    .login-section {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
       height: 100%;
       width: 100%;
-      img {
-        width: 100%;
-        height: auto;
-        max-height: 100%;
-        object-fit: cover;
+      .login-page__form {
+        flex: 1;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        text-align: start;
+        form {
+          flex: 9;
+          display: flex;
+          flex-direction: column;
+          h2 {
+            margin-bottom: 3rem;
+          }
+          h1 {
+            color: #2d2d2d;
+            font-size: 3rem;
+          }
+          p {
+            color: #888;
+            margin: 0.5rem 0 3rem 0;
+          }
+          input {
+            padding: 1rem;
+            font-size: 1.3rem;
+            margin: 0.3rem 0;
+            &::placeholder {
+              color: #aaa;
+            }
+            &:focus {
+              border: 1px solid #4f9cf9;
+            }
+          }
+          .form-options {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+            label {
+              display: flex;
+              align-content: center;
+              gap: 0.2rem;
+            }
+            input[type="checkbox"] {
+              accent-color: #4f9cf9;
+              width: 13px;
+              height: 13px;
+            }
+            a {
+              text-decoration: none;
+              color: #85c8ff;
+            }
+          }
+          button {
+            margin-top: 5rem;
+            padding: 1rem;
+            background-color: #4f9cf9;
+            color: white;
+            border: none;
+            width: 40%;
+            border-radius: 10px;
+            font-size: 1rem;
+            &:hover {
+              background-color: #3c8ce3;
+            }
+          }
+        }
+        .signup-link {
+          flex: 1;
+          width: 80%;
+          a {
+            text-decoration: none;
+            color: #85c8ff;
+            font-weight: 800;
+            margin-left: 0.2rem;
+          }
+        }
+      }
+      .login-page__image {
+        flex: 1.5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        img {
+          border-radius: 10px;
+          width: 100%;
+          max-height: 100%;
+          object-fit: cover;
+        }
       }
     }
   }
