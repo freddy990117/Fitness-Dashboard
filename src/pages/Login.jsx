@@ -8,6 +8,8 @@ export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  // 儲存帳戶錯誤的狀態
+  const [errorMessage, setErrorMessage] = useState("");
   // 設定提交資料與驗證的函式
   const handleLoginSubmit = async (e) => {
     // 終止表單的預設送出行為
@@ -15,10 +17,11 @@ export const Login = () => {
     try {
       // signInWithEmailAndPassword 是 firebase 提供的非同步函式，會自動比對 email,password
       await signInWithEmailAndPassword(auth, email, password);
+      setErrorMessage("");
       // 比對成功在執行下一步（正確就跳轉頁面）
       navigate("/dashboard");
     } catch (error) {
-      console.log("登入失敗，因為：" + error.message);
+      setErrorMessage(error.message);
     }
   };
   return (
@@ -64,6 +67,10 @@ export const Login = () => {
                 </label>
                 <a href="#">Forgot Password?</a>
               </div>
+              {/* 新增登入錯誤提示 */}
+              {errorMessage && (
+                <p className="error-message">帳號或是密碼錯誤！</p>
+              )}
               <button type="submit">Sign In</button>
             </form>
             <p className="signup-link">
