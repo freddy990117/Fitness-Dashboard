@@ -2,6 +2,7 @@ import React from "react";
 import "../styles/sidebar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faDumbbell,
   faHouse,
   faChildReaching,
   faCalendarDays,
@@ -12,28 +13,41 @@ const Sidebar = () => {
   return (
     <div className="sidebar-wrapper">
       <div className="sidebar-header">
-        <img src="/vite.svg" alt="user1_Photo" />
-        <h2>user1</h2>
+        <FontAwesomeIcon icon={faDumbbell} className="header-awesome" />
+        <h2>User1</h2>
       </div>
       <div className="sidebar-menu">
         <h3>
-          <FontAwesomeIcon icon={faHouse} /> <a href="#">Home</a>
+          <FontAwesomeIcon icon={faHouse} className="awesome-icon" />{" "}
+          <a href="#">Home</a>
         </h3>
         <h3 className="disable">
-          <FontAwesomeIcon icon={faChildReaching} />{" "}
-          <a href="#">Profile (Under Development)</a>
+          <FontAwesomeIcon icon={faChildReaching} className="awesome-icon" />{" "}
+          <a href="#">
+            Profile <br />
+            {/* (Comming Soon...) */}
+          </a>
         </h3>
         <h3 className="disable">
-          <FontAwesomeIcon icon={faCalendarDays} />
-          <a href="#">Calendar (Under Development)</a>
+          <FontAwesomeIcon icon={faCalendarDays} className="awesome-icon" />
+          <a href="#">
+            {" "}
+            Calendar <br />
+            {/* (Comming Soon...) */}
+          </a>
         </h3>
+        <div className="line"></div>
         <h3 className="disable">
-          <FontAwesomeIcon icon={faGear} />
-          <a href="#">Setting (Under Development)</a>
+          <FontAwesomeIcon icon={faGear} className="awesome-icon" />
+          <a href="#">
+            {" "}
+            Setting <br />
+            {/* (Comming Soon...) */}
+          </a>
         </h3>
         <h3>
-          <FontAwesomeIcon icon={faRightFromBracket} />
-          <a href="#">Layout</a>
+          <FontAwesomeIcon icon={faRightFromBracket} className="awesome-icon" />
+          <a href="#"> Layout</a>
         </h3>
       </div>
     </div>
