@@ -2,9 +2,12 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Rubik", sans-serif;
 }
 
 body {
   font-family: sans-serif;
   background-color: #f9f9f9;
+  width: 100%;
+  height: 100vh;
 }/*# sourceMappingURL=index.css.map */
