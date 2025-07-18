@@ -1,5 +1,5 @@
 import React from "react";
-
+import "../styles/card.css";
 const Card = () => {
   return (
     <section className="card-container">
