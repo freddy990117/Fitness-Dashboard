@@ -37,7 +37,7 @@ const Card = () => {
         </div>
         <div className="card-item card-protein">
           <div className="card-item-header">
-            <FontAwesomeIcon className="icon" icon={faEgg} />
+            {/* <FontAwesomeIcon className="icon" icon={faEgg} /> */}
             <h1>Protein</h1>
           </div>
           <div className="card-item-body">
