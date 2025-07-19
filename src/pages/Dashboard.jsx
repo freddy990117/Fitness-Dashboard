@@ -9,7 +9,6 @@ export const Dashboard = () => {
       </div>
       <div className="card">
         <Card />
-        {/* 先預留給 CARD 後面帶入時比較方便 */}
       </div>
     </div>
   );

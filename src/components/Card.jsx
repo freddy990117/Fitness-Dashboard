@@ -4,18 +4,28 @@ const Card = () => {
   return (
     <section className="card-container">
       <div className="card-header">
-        <h2>
-          Keep it up,Homie!
+        <h1>
+          Keep it up, Homie！
           <br />
-          Stay consistent
-        </h2>
+          Stay Hard！
+        </h1>
       </div>
       <div className="card-body">
-        <div className="card-item card-weight"></div>
-        <div className="card-item card-workout"></div>
-        <div className="card-item card-protein"></div>
-        <div className="card-bar card-weight-change"></div>
-        <div className="card-bar card-tip"></div>
+        <div className="card-item card-weight">Weight</div>
+        <div className="card-item card-workout">Workout</div>
+        <div className="card-item card-protein">Protein</div>
+        <div className="card-bar card-weight-change">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere quos
+          nam eius, numquam dolore omnis odit necessitatibus exercitationem
+          dolorem, optio dolores ipsum ad animi ullam mollitia dolor illo
+          obcaecati. Nulla!
+        </div>
+        <div className="card-bar card-tip">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequatur
+          placeat necessitatibus consequuntur quisquam neque dolorum explicabo
+          distinctio ab numquam a eos dignissimos quo atque tempora libero ut,
+          cum quam rerum.
+        </div>
       </div>
     </section>
   );

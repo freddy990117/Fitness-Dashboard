@@ -1,7 +1,29 @@
 .card-container {
+  display: flex;
+  flex-direction: column;
+  color: #06283d;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    // 斜角從左上到右下
+    #dff6ff 0%,
+    // 淺藍
+    #8cc0de 50%,
+    // 較藍
+    #47b5ff 100% // 最深藍
+  );
   .card-header {
+    flex: 2;
+    background-color: lightblue;
+    h1 {
+      padding: 1rem;
+      font-size: 2.5rem;
+      margin: 1rem 0 0 3rem;
+    }
   }
   .card-body {
+    background-color: lightcoral;
+    flex: 8;
     .card-item {
     }
     .card-bar {

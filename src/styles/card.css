@@ -1,1 +1,20 @@
-/*# sourceMappingURL=card.css.map */
+.card-container {
+  display: flex;
+  flex-direction: column;
+  color: #06283d;
+  height: 100%;
+  background: linear-gradient(135deg, #dff6ff 0%, #8cc0de 50%, #47b5ff 100%);
+}
+.card-container .card-header {
+  flex: 2;
+  background-color: lightblue;
+}
+.card-container .card-header h1 {
+  padding: 1rem;
+  font-size: 2.5rem;
+  margin: 1rem 0 0 3rem;
+}
+.card-container .card-body {
+  background-color: lightcoral;
+  flex: 8;
+}/*# sourceMappingURL=card.css.map */
