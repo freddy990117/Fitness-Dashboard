@@ -7,6 +7,8 @@ import {
   faWeightScale,
 } from "@fortawesome/free-solid-svg-icons";
 const Card = () => {
+  // Protein's Percent(之後會依照 User 輸入而變更)
+  const proteinPercent = 100;
   return (
     <section className="card-container">
       <div className="card-header">
@@ -37,12 +39,19 @@ const Card = () => {
         </div>
         <div className="card-item card-protein">
           <div className="card-item-header">
-            {/* <FontAwesomeIcon className="icon" icon={faEgg} /> */}
+            <FontAwesomeIcon className="icon" icon={faEgg} />
             <h1>Protein</h1>
           </div>
           <div className="card-item-body">
-            <h1>80%</h1>
-            {/* Chart...... */}
+            {/*  依照 User 的輸入而改變 */}
+            <h1>{proteinPercent}%</h1>
+            <div className="protein-bar">
+              <div
+                className="protein-bar-fill"
+                // 依照 User 的輸入而改變
+                style={{ width: `${proteinPercent}%` }}
+              ></div>
+            </div>
           </div>
         </div>
         <div className="card-bar card-weight-change">
