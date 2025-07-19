@@ -1,5 +1,11 @@
 import React from "react";
 import "../styles/card.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faDumbbell,
+  faEgg,
+  faWeightScale,
+} from "@fortawesome/free-solid-svg-icons";
 const Card = () => {
   return (
     <section className="card-container">
@@ -11,16 +17,27 @@ const Card = () => {
         </h1>
       </div>
       <div className="card-body">
-        <div className="card-item card-weight">Weight</div>
-        <div className="card-item card-workout">Workout</div>
-        <div className="card-item card-protein">Protein</div>
+        <div className="card-item card-weight">
+          <FontAwesomeIcon icon={faWeightScale} />
+          Weight
+        </div>
+        <div className="card-item card-workout">
+          <FontAwesomeIcon icon={faDumbbell} />
+          Workout
+        </div>
+        <div className="card-item card-protein">
+          <FontAwesomeIcon icon={faEgg} />
+          Protein
+        </div>
         <div className="card-bar card-weight-change">
+          <h1>Weight Change Line Chart</h1>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere quos
           nam eius, numquam dolore omnis odit necessitatibus exercitationem
           dolorem, optio dolores ipsum ad animi ullam mollitia dolor illo
           obcaecati. Nulla!
         </div>
         <div className="card-bar card-tip">
+          <h1>Health Tip</h1>
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequatur
           placeat necessitatibus consequuntur quisquam neque dolorum explicabo
           distinctio ab numquam a eos dignissimos quo atque tempora libero ut,
