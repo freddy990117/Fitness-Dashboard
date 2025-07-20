@@ -7,7 +7,8 @@ import {
   faWeightScale,
 } from "@fortawesome/free-solid-svg-icons";
 const Card = () => {
-
+  // Protein's Percent(之後會依照 User 輸入而變更)
+  const proteinPercent = 60;
   // HealthTips
   const healthTips = [
     "每天至少喝足 2000c.c 水，維持身體代謝與健康。",
