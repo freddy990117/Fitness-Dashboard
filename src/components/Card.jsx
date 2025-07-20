@@ -7,8 +7,10 @@ import {
   faWeightScale,
 } from "@fortawesome/free-solid-svg-icons";
 const Card = () => {
-  // Protein's Percent(之後會依照 User 輸入而變更)
+  // User info (之後會依照 User 輸入而變更)
   const proteinPercent = 60;
+  const weight = 80;
+  const workoutCount = 0;
   // HealthTips
   const healthTips = [
     "每天至少喝足 2000c.c 水，維持身體代謝與健康。",
@@ -50,7 +52,7 @@ const Card = () => {
             <h1>Weight</h1>
           </div>
           <div className="card-item-body">
-            <h1>80kg</h1>
+            <h1>{weight}kg</h1>
           </div>
         </div>
         <div className="card-item card-workout">
@@ -59,7 +61,7 @@ const Card = () => {
             <h1>Workout</h1>
           </div>
           <div className="card-item-body">
-            <h1> 1 times</h1>
+            <h1>{workoutCount} times</h1>
           </div>
         </div>
         <div className="card-item card-protein">
@@ -80,7 +82,7 @@ const Card = () => {
           </div>
         </div>
         <div className="card-bar card-weight-change">
-          <h1>Weight Change Line Chart</h1>
+          <h1>Weight Trend Line </h1>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere quos
           nam eius, numquam dolore omnis odit necessitatibus exercitationem
           dolorem, optio dolores ipsum ad animi ullam mollitia dolor illo

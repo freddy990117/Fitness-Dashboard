@@ -68,17 +68,14 @@
 }
 .card-container .card-body .card-weight {
   grid-area: 1/1/3/3;
-  background-color: lightblue;
 }
 .card-container .card-body .card-workout {
   grid-area: 1/3/3/5;
-  background-color: lightcoral;
 }
 .card-container .card-body .card-protein {
   grid-area: 1/5/3/7;
 }
 .card-container .card-body .card-weight-change {
-  background-color: lightcoral;
   grid-area: 3/1/5/7;
 }
 .card-container .card-body .card-tip {
