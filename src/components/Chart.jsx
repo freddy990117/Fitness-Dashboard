@@ -29,6 +29,7 @@ const Chart = () => {
         label: "Weight (kg)",
         data: [78.3, 78.5, 78.6, 78.8, 79, 78.9, 79],
         borderColor: "#47b5ff",
+        backgroundColor: "rgba(71, 181, 255, 0.3)",
         borderWidth: 6,
         fill: true,
         tension: 0.6,

@@ -105,4 +105,3 @@ export default Card;
 // #47b5ff 活潑水藍
 // 補助線條
 // #8cc0de
- 
