@@ -40,11 +40,7 @@ const Card = () => {
   return (
     <section className="card-container">
       <div className="card-header">
-        <h1>
-          Keep it up, Homie！
-          <br />
-          Stay Hard！
-        </h1>
+        <h1>Keep it up, Homie！ Stay Hard！</h1>
       </div>
       <div className="card-body">
         <div className="card-item card-weight">
