@@ -42,17 +42,18 @@ const Chart = () => {
     responsive: true,
     plugins: {
       legend: { display: false },
-      tooltip: { enabled: false },
+      tooltip: {
+        enabled: true,
+        mode: "index",
+        intersect: false,
+        backgroundColor: "#47b5ff",
+        titleColor: "#fff",
+        bodyColor: "#fff",
+      },
     },
     scales: {
-      x: {
-        display: false,
-        grid: { display: false },
-      },
-      y: {
-        display: false,
-        grid: { display: false },
-      },
+      x: { display: false, grid: { display: false } },
+      y: { display: false, grid: { display: false } },
     },
   };
   return (
