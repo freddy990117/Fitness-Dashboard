@@ -1,6 +1,7 @@
 import React from "react";
 import "../styles/card.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Chart from "./Chart";
 import {
   faDumbbell,
   faEgg,
@@ -39,11 +40,7 @@ const Card = () => {
   return (
     <section className="card-container">
       <div className="card-header">
-        <h1>
-          Keep it up, Homie！
-          <br />
-          Stay Hard！
-        </h1>
+        <h1>Keep it up, Homie！ Stay Hard！</h1>
       </div>
       <div className="card-body">
         <div className="card-item card-weight">
@@ -83,11 +80,7 @@ const Card = () => {
         </div>
         <div className="card-bar card-weight-change">
           <h1>Weight Trend Line </h1>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere quos
-          nam eius, numquam dolore omnis odit necessitatibus exercitationem
-          dolorem, optio dolores ipsum ad animi ullam mollitia dolor illo
-          obcaecati. Nulla!
-          {/* Chart......  */}
+          <Chart />
         </div>
         <div className="card-bar card-tip">
           <h1>Health Tip</h1>

@@ -13,7 +13,7 @@
     #47b5ff 100% // 最深藍
   );
   .card-header {
-    flex: 2;
+    flex: 1;
     h1 {
       padding: 1rem;
       font-size: 2.5rem;
@@ -23,15 +23,20 @@
   .card-body {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(6, 1fr);
+    grid-template-rows: repeat(8, 1fr);
     grid-column-gap: 0px;
     grid-row-gap: 0px;
-    flex: 8;
+    flex: 9;
     .card-item {
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: space-between;
+      margin-left: 20%;
+      padding: 1.5rem;
+      background-color: white;
+      border-radius: 10%;
+      width: 50%;
       .card-item-header {
         display: flex;
         gap: 1rem;
@@ -68,10 +73,21 @@
       }
     }
     .card-bar {
-      padding: 2rem 3rem 3rem 3rem;
+      height: 80%;
+      width: 90%;
+      margin: 2rem 0 0 5rem;
+      padding: 2rem;
+      background-color: white;
+      border-radius: 1rem;
       h1 {
         font-size: 2rem;
         margin-bottom: 1rem;
+      }
+    }
+    .card-weight-change {
+      height: 80%;
+      canvas {
+        max-height: 100px !important;
       }
     }
     .card-weight {
@@ -84,10 +100,10 @@
       grid-area: 1 / 5 / 3 / 7;
     }
     .card-weight-change {
-      grid-area: 3 / 1 / 5 / 7;
+      grid-area: 3 / 1 / 6 / 7;
     }
     .card-tip {
-      grid-area: 5 / 1 / 7 / 7;
+      grid-area: 6 / 1 / 9 / 7;
       h2 {
         font-size: 2rem;
       }
