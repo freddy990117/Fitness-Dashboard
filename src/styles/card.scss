@@ -74,6 +74,13 @@
         margin-bottom: 1rem;
       }
     }
+    .card-weight-change {
+      height: 100%;
+      canvas {
+        width: 20% !important;
+        height: 20% !important;
+      }
+    }
     .card-weight {
       grid-area: 1 / 1 / 3 / 3;
     }

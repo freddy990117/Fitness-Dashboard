@@ -1,6 +1,7 @@
 import React from "react";
 import "../styles/card.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Chart from "./Chart";
 import {
   faDumbbell,
   faEgg,
@@ -83,11 +84,7 @@ const Card = () => {
         </div>
         <div className="card-bar card-weight-change">
           <h1>Weight Trend Line </h1>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere quos
-          nam eius, numquam dolore omnis odit necessitatibus exercitationem
-          dolorem, optio dolores ipsum ad animi ullam mollitia dolor illo
-          obcaecati. Nulla!
-          {/* Chart......  */}
+          <Chart />
         </div>
         <div className="card-bar card-tip">
           <h1>Health Tip</h1>
@@ -108,3 +105,4 @@ export default Card;
 // #47b5ff 活潑水藍
 // 補助線條
 // #8cc0de
+ 
