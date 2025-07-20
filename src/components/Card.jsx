@@ -7,6 +7,7 @@ import {
   faWeightScale,
 } from "@fortawesome/free-solid-svg-icons";
 const Card = () => {
+
   // HealthTips
   const healthTips = [
     "每天至少喝足 2000c.c 水，維持身體代謝與健康。",
@@ -31,6 +32,7 @@ const Card = () => {
     "避免熬夜有助內分泌穩定，提升訓練效果。",
   ];
   const randomTips = healthTips[Math.floor(Math.random() * healthTips.length)];
+
   return (
     <section className="card-container">
       <div className="card-header">
@@ -65,8 +67,15 @@ const Card = () => {
             <h1>Protein</h1>
           </div>
           <div className="card-item-body">
-            <h1>80%</h1>
-            {/* Chart...... */}
+            {/*  依照 User 的輸入而改變 */}
+            <h1>{proteinPercent}%</h1>
+            <div className="protein-bar">
+              <div
+                className="protein-bar-fill"
+                // 依照 User 的輸入而改變
+                style={{ width: `${proteinPercent}%` }}
+              ></div>
+            </div>
           </div>
         </div>
         <div className="card-bar card-weight-change">
