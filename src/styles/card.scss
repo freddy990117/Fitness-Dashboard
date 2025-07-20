@@ -86,11 +86,13 @@
     }
     .card-weight-change {
       background-color: lightcoral;
-
       grid-area: 3 / 1 / 5 / 7;
     }
     .card-tip {
       grid-area: 5 / 1 / 7 / 7;
+      h2 {
+        font-size: 2rem;
+      }
     }
   }
 }

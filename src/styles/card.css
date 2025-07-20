@@ -82,4 +82,7 @@
 }
 .card-container .card-body .card-tip {
   grid-area: 5/1/7/7;
+}
+.card-container .card-body .card-tip h2 {
+  font-size: 2rem;
 }/*# sourceMappingURL=card.css.map */
