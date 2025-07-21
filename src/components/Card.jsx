@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useState, useEffect } from "react";
 import "../styles/card.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Chart from "./Chart";
@@ -7,11 +7,11 @@ import {
   faEgg,
   faWeightScale,
 } from "@fortawesome/free-solid-svg-icons";
+// import FireStore
+import { doc, onSnapshot } from "firebase/firestore";
+import { db } from "../services/firebase";
+
 const Card = () => {
-  // User info (之後會依照 User 輸入而變更)
-  const proteinPercent = 60;
-  const weight = 80;
-  const workoutCount = 0;
   // HealthTips
   const healthTips = [
     "每天至少喝足 2000c.c 水，維持身體代謝與健康。",
@@ -37,6 +37,32 @@ const Card = () => {
   ];
   const randomTips = healthTips[Math.floor(Math.random() * healthTips.length)];
 
+  // FireStore Database
+  // 先將 Database 的資料預設為 0，防止錯誤訊息跳出 (null)
+  const [fitnessData, setFitnessData] = useState({
+    weight: 0,
+    proteinPercent: 0,
+    workoutCount: 0,
+  });
+
+  // 在畫面 Render 後執行，而因為 onSnapshot 會將資料自動 push 到 data 內，所以不用設定 dependency
+  useEffect(() => {
+    // onSnapshot 是官方提供的函式，用於「即時」監聽資料庫的變化，第一個參數是「指定要使用哪一筆資料」
+    const unsub = onSnapshot(
+      // 取得的資料是 users (Collection) 內 user1 (Document) 的 Database
+      doc(db, "users", "user1"),
+      // onSnapshot 第二個參數是一個 callBack fn
+      (doc) => {
+        // exists 檢查資料庫中是否有這筆資料
+        if (doc.exists()) {
+          // data 用物件的方式返回資料 {..,..,..}
+          setFitnessData(doc.data());
+        }
+      }
+    );
+    return () => unsub();
+  }, []);
+
   return (
     <section className="card-container">
       <div className="card-header">
@@ -49,7 +75,7 @@ const Card = () => {
             <h1>Weight</h1>
           </div>
           <div className="card-item-body">
-            <h1>{weight}kg</h1>
+            <h1>{fitnessData.weight}kg</h1>
           </div>
         </div>
         <div className="card-item card-workout">
@@ -58,7 +84,7 @@ const Card = () => {
             <h1>Workout</h1>
           </div>
           <div className="card-item-body">
-            <h1>{workoutCount} times</h1>
+            <h1>{fitnessData.workoutCount} times</h1>
           </div>
         </div>
         <div className="card-item card-protein">
@@ -68,12 +94,12 @@ const Card = () => {
           </div>
           <div className="card-item-body">
             {/*  依照 User 的輸入而改變 */}
-            <h1>{proteinPercent}%</h1>
+            <h1>{fitnessData.proteinPercent}%</h1>
             <div className="protein-bar">
               <div
                 className="protein-bar-fill"
                 // 依照 User 的輸入而改變
-                style={{ width: `${proteinPercent}%` }}
+                style={{ width: `${fitnessData.proteinPercent}%` }}
               ></div>
             </div>
           </div>
