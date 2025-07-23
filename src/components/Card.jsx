@@ -77,6 +77,12 @@ const Card = () => {
           <div className="card-item-body">
             <h1>{fitnessData.weight}kg</h1>
           </div>
+          <div className="card-crud-item">
+            <div className="card-crud-btn minus">-</div>
+            <div className="card-crud-btn plus">+</div>
+            <div className="card-crud-btn save">Save</div>
+            <div className="card-crud-btn cancel">Cancel</div>
+          </div>
         </div>
         <div className="card-item card-workout">
           <div className="card-item-header">
@@ -85,6 +91,12 @@ const Card = () => {
           </div>
           <div className="card-item-body">
             <h1>{fitnessData.workoutCount} times</h1>
+          </div>
+          <div className="card-crud-item">
+            <div className="card-crud-btn minus">-</div>
+            <div className="card-crud-btn plus">+</div>
+            <div className="card-crud-btn save">Save</div>
+            <div className="card-crud-btn cancel">Cancel</div>
           </div>
         </div>
         <div className="card-item card-protein">
@@ -102,6 +114,12 @@ const Card = () => {
                 style={{ width: `${fitnessData.proteinPercent}%` }}
               ></div>
             </div>
+          </div>
+          <div className="card-crud-item">
+            <div className="card-crud-btn add">Add</div>
+            <div className="card-crud-btn modify">Modify</div>
+            <div className="card-crud-btn save">Save</div>
+            <div className="card-crud-btn cancel">Cancel</div>
           </div>
         </div>
         <div className="card-bar card-weight-change">
@@ -127,3 +145,11 @@ export default Card;
 // #47b5ff 活潑水藍
 // 補助線條
 // #8cc0de
+
+{
+  /* <div className="card-crud-item">
+  <div className="card-crud-btn minus">-</div>
+  <div className="card-crud-btn plus">+</div>
+  <div className="card-crud-btn finish">Finish</div>{" "}
+</div>; */
+}
