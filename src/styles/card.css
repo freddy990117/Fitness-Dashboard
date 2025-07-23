@@ -77,7 +77,13 @@
   background-color: white;
   width: 110%;
   text-align: center;
+}
+.card-container .card-body .card-item .card-crud-item .card-crud-btn button {
   font-size: 1.2rem;
+  width: 100%;
+  border: none;
+  background-color: white;
+  cursor: pointer;
 }
 .card-container .card-body .card-bar {
   height: 80%;

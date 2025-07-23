@@ -78,10 +78,18 @@ const Card = () => {
             <h1>{fitnessData.weight}kg</h1>
           </div>
           <div className="card-crud-item">
-            <div className="card-crud-btn minus">-</div>
-            <div className="card-crud-btn plus">+</div>
-            <div className="card-crud-btn save">Save</div>
-            <div className="card-crud-btn cancel">Cancel</div>
+            <div className="card-crud-btn minus">
+              <button>-</button>
+            </div>
+            <div className="card-crud-btn plus">
+              <button>+</button>
+            </div>
+            <div className="card-crud-btn save">
+              <button>Save</button>
+            </div>
+            <div className="card-crud-btn cancel">
+              <button>Cancel</button>
+            </div>
           </div>
         </div>
         <div className="card-item card-workout">
@@ -93,10 +101,18 @@ const Card = () => {
             <h1>{fitnessData.workoutCount} times</h1>
           </div>
           <div className="card-crud-item">
-            <div className="card-crud-btn minus">-</div>
-            <div className="card-crud-btn plus">+</div>
-            <div className="card-crud-btn save">Save</div>
-            <div className="card-crud-btn cancel">Cancel</div>
+            <div className="card-crud-btn minus">
+              <button>-</button>
+            </div>
+            <div className="card-crud-btn plus">
+              <button>+</button>
+            </div>
+            <div className="card-crud-btn save">
+              <button>Save</button>
+            </div>
+            <div className="card-crud-btn cancel">
+              <button>Cancel</button>
+            </div>
           </div>
         </div>
         <div className="card-item card-protein">
@@ -116,10 +132,18 @@ const Card = () => {
             </div>
           </div>
           <div className="card-crud-item">
-            <div className="card-crud-btn add">Add</div>
-            <div className="card-crud-btn modify">Modify</div>
-            <div className="card-crud-btn save">Save</div>
-            <div className="card-crud-btn cancel">Cancel</div>
+            <div className="card-crud-btn add">
+              <button>Add</button>
+            </div>
+            <div className="card-crud-btn modify">
+              <button>Modify</button>
+            </div>
+            <div className="card-crud-btn save">
+              <button>Save</button>
+            </div>
+            <div className="card-crud-btn cancel">
+              <button>Cancel</button>
+            </div>
           </div>
         </div>
         <div className="card-bar card-weight-change">
