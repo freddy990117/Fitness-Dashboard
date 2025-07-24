@@ -51,18 +51,21 @@ const Card = () => {
   const [workout, setWorkout] = useState(0);
   const [protein, setProtein] = useState(0);
 
+  // 放置快取的資料，當按下 save 時在進行變更
+  const [editWeight, setEditWeight] = useState(null);
+  const [editWorkout, setEditWorkout] = useState(null);
+  const [editProtein, setEditProtein] = useState(null);
+
   // 將最新的 weight data 即時更新到 fireStore 上
   const updateWeight = async (newWeight) => {
     await updateDoc(doc(db, "users", "user1"), { weight: newWeight });
   };
-
   // 將最新的 workoutCount data 即時更新到 fireStore 上
   const updateWorkoutTime = async (newWorkoutTime) => {
     await updateDoc(doc(db, "users", "user1"), {
       workoutCount: newWorkoutTime,
     });
   };
-
   // 將最新的 proteinPercent data 即時更新到 fireStore 上
   const updateProtein = async (newProtein) => {
     await updateDoc(doc(db, "users", "user1"), { proteinPercent: newProtein });
@@ -102,15 +105,15 @@ const Card = () => {
             <h1>Weight</h1>
           </div>
           <div className="card-item-body">
-            <h1>{fitnessData.weight}kg</h1>
+            <h1>{editWeight !== null ? editWeight : fitnessData.weight}kg</h1>{" "}
           </div>
           <div className="card-crud-item">
             <div className="card-crud-btn minus">
               <button
                 onClick={() => {
-                  const updated = weight - 0.5;
-                  setWeight(updated);
-                  updateWeight(updated);
+                  setEditWeight((prev) =>
+                    prev === null ? fitnessData.weight - 0.5 : prev - 0.5
+                  );
                 }}
               >
                 -
@@ -119,19 +122,34 @@ const Card = () => {
             <div className="card-crud-btn plus">
               <button
                 onClick={() => {
-                  const updated = weight + 0.5;
-                  setWeight(updated);
-                  updateWeight(updated);
+                  setEditWeight((prev) =>
+                    prev === null ? fitnessData.weight + 0.5 : prev + 0.5
+                  );
                 }}
               >
                 +
               </button>
             </div>
             <div className="card-crud-btn save">
-              <button>Save</button>
+              <button
+                onClick={() => {
+                  if (editWeight !== null) {
+                    updateWeight(editWeight); // ✅ 更新 Firestore
+                    setEditWeight(null); // ✅ 清空快取狀態
+                  }
+                }}
+              >
+                Save
+              </button>
             </div>
             <div className="card-crud-btn cancel">
-              <button>Cancel</button>
+              <button
+                onClick={() => {
+                  setEditWeight(null);
+                }}
+              >
+                Cancel
+              </button>
             </div>
           </div>
         </div>
