@@ -8,7 +8,7 @@ import {
   faWeightScale,
 } from "@fortawesome/free-solid-svg-icons";
 // import FireStore
-import { doc, onSnapshot } from "firebase/firestore";
+import { doc, onSnapshot, updateDoc } from "firebase/firestore";
 import { db } from "../services/firebase";
 
 const Card = () => {
@@ -44,8 +44,28 @@ const Card = () => {
     proteinPercent: 0,
     workoutCount: 0,
   });
+  // 初始 User 體重、訓練次數與蛋白質的初始值（後續透過 useEffect doc 取得即時的資料,並在 button 設定 onClick，即時變更畫面顯示）
+  const [weight, setWeight] = useState(0);
+  const [workout, setWorkout] = useState(0);
+  const [protein, setProtein] = useState(0);
 
-  // 在畫面 Render 後執行，而因為 onSnapshot 會將資料自動 push 到 data 內，所以不用設定 dependency
+  // 將最新的 weight data 即時更新到 fireStore 上
+  const updateWeight = async (newWeight) => {
+    await updateDoc(doc(db, "users", "user1"), { weight: newWeight });
+  };
+
+  // 將最新的 workoutCount data 即時更新到 fireStore 上
+  const updateWorkoutTime = async (newWorkoutTime) => {
+    await updateDoc(doc(db, "users", "user1"), {
+      workoutCount: newWorkoutTime,
+    });
+  };
+
+  // 將最新的 proteinPercent data 即時更新到 fireStore 上
+  const updateProtein = async (newProtein) => {
+    await updateDoc(doc(db, "users", "user1"), { proteinPercent: newProtein });
+  };
+  // 在畫面 Render 後執行，使用 onSnapshot 監聽 Firestore 的變化，自動推送資料至 state，因此無需指定 dependency
   useEffect(() => {
     // onSnapshot 是官方提供的函式，用於「即時」監聽資料庫的變化，第一個參數是「指定要使用哪一筆資料」
     const unsub = onSnapshot(
@@ -55,8 +75,13 @@ const Card = () => {
       (doc) => {
         // exists 檢查資料庫中是否有這筆資料
         if (doc.exists()) {
-          // data 用物件的方式返回資料 {..,..,..}
-          setFitnessData(doc.data());
+          // data() 以物件的方式返回資料 {..,..,..}
+          const data = doc.data();
+          // 設定值給各項參數
+          setFitnessData(data);
+          setWeight(data.weight);
+          setWorkout(data.workoutCount);
+          setProtein(data.protein);
         }
       }
     );
@@ -79,10 +104,26 @@ const Card = () => {
           </div>
           <div className="card-crud-item">
             <div className="card-crud-btn minus">
-              <button>-</button>
+              <button
+                onClick={() => {
+                  const updated = weight - 0.5;
+                  setWeight(updated);
+                  updateWeight(updated);
+                }}
+              >
+                -
+              </button>
             </div>
             <div className="card-crud-btn plus">
-              <button>+</button>
+              <button
+                onClick={() => {
+                  const updated = weight + 0.5;
+                  setWeight(updated);
+                  updateWeight(updated);
+                }}
+              >
+                +
+              </button>
             </div>
             <div className="card-crud-btn save">
               <button>Save</button>
@@ -102,10 +143,26 @@ const Card = () => {
           </div>
           <div className="card-crud-item">
             <div className="card-crud-btn minus">
-              <button>-</button>
+              <button
+                onClick={() => {
+                  const updated = workout - 1;
+                  setWorkout(updated);
+                  updateWorkoutTime(updated);
+                }}
+              >
+                -
+              </button>
             </div>
             <div className="card-crud-btn plus">
-              <button>+</button>
+              <button
+                onClick={() => {
+                  const updated = workout + 1;
+                  setWorkout(updated);
+                  updateWorkoutTime(updated);
+                }}
+              >
+                +
+              </button>
             </div>
             <div className="card-crud-btn save">
               <button>Save</button>
