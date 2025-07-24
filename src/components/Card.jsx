@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useRef } from "react";
 import "../styles/card.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Chart from "./Chart";
@@ -35,7 +35,9 @@ const Card = () => {
     "適量拉伸提升柔軟度，減少日常不適與僵硬。",
     "避免熬夜有助內分泌穩定，提升訓練效果。",
   ];
-  const randomTips = healthTips[Math.floor(Math.random() * healthTips.length)];
+  const randomTips = useRef(
+    healthTips[Math.floor(Math.random() * healthTips.length)]
+  );
 
   // FireStore Database
   // 先將 Database 的資料預設為 0，防止錯誤訊息跳出 (null)
@@ -209,7 +211,7 @@ const Card = () => {
         </div>
         <div className="card-bar card-tip">
           <h1>Health Tip</h1>
-          <h2>{randomTips}</h2>
+          <h2>{randomTips.current}</h2>
         </div>
       </div>
     </section>
