@@ -47,6 +47,7 @@ const Card = () => {
     workoutCount: 0,
   });
   // 初始 User 體重、訓練次數與蛋白質的初始值（後續透過 useEffect doc 取得即時的資料,並在 button 設定 onClick，即時變更畫面顯示）
+  //（目前這邊是還沒有用到的 State，看後面需不需要更改）
   const [weight, setWeight] = useState(0);
   const [workout, setWorkout] = useState(0);
   const [protein, setProtein] = useState(0);
@@ -70,6 +71,7 @@ const Card = () => {
   const updateProtein = async (newProtein) => {
     await updateDoc(doc(db, "users", "user1"), { proteinPercent: newProtein });
   };
+
   // 在畫面 Render 後執行，使用 onSnapshot 監聽 Firestore 的變化，自動推送資料至 state，因此無需指定 dependency
   useEffect(() => {
     // onSnapshot 是官方提供的函式，用於「即時」監聽資料庫的變化，第一個參數是「指定要使用哪一筆資料」
@@ -105,13 +107,15 @@ const Card = () => {
             <h1>Weight</h1>
           </div>
           <div className="card-item-body">
-            <h1>{editWeight !== null ? editWeight : fitnessData.weight}kg</h1>{" "}
+            {/* editWeight 如果是 null，顯示 firestore 的內容，不是的話則顯示更改的值 */}
+            <h1>{editWeight !== null ? editWeight : fitnessData.weight}kg</h1>
           </div>
           <div className="card-crud-item">
             <div className="card-crud-btn minus">
               <button
                 onClick={() => {
                   setEditWeight((prev) =>
+                    // setEditWeight 如果是 null 值會是 => 初始值開始，如果不是則是從 editWeight 開始
                     prev === null ? fitnessData.weight - 0.5 : prev - 0.5
                   );
                 }}
@@ -123,6 +127,7 @@ const Card = () => {
               <button
                 onClick={() => {
                   setEditWeight((prev) =>
+                    // setEditWeight 如果是 null 會是從初始值開始，如果不是則是從 editWeight 開始
                     prev === null ? fitnessData.weight + 0.5 : prev + 0.5
                   );
                 }}
@@ -134,8 +139,8 @@ const Card = () => {
               <button
                 onClick={() => {
                   if (editWeight !== null) {
-                    updateWeight(editWeight); // ✅ 更新 Firestore
-                    setEditWeight(null); // ✅ 清空快取狀態
+                    updateWeight(editWeight); // 上傳 editWeight 給 setEditWeight(async fn)，使其將資料傳給 Firestore
+                    setEditWeight(null); // 清空狀態
                   }
                 }}
               >
@@ -145,6 +150,7 @@ const Card = () => {
             <div className="card-crud-btn cancel">
               <button
                 onClick={() => {
+                  // 清空狀態，返回初始值 (null)
                   setEditWeight(null);
                 }}
               >
@@ -159,15 +165,23 @@ const Card = () => {
             <h1>Workout</h1>
           </div>
           <div className="card-item-body">
-            <h1>{fitnessData.workoutCount} times</h1>
+            <h1>
+              {/* editWorkout 如果是 null，顯示 firestore 的內容，不是的話則顯示更改的值 */}
+              {editWorkout !== null ? editWorkout : fitnessData.workoutCount}{" "}
+              times
+            </h1>
           </div>
           <div className="card-crud-item">
             <div className="card-crud-btn minus">
               <button
                 onClick={() => {
-                  const updated = workout - 1;
-                  setWorkout(updated);
-                  updateWorkoutTime(updated);
+                  setEditWorkout((prev) => {
+                    // 如果 editWorkout 的值不是 null，current 會是 workoutCount，是的話則是 editWorkout
+                    const current =
+                      prev === null ? fitnessData.workoutCount : prev;
+                    // 防止 current < 0
+                    return current > 0 ? current - 1 : 0;
+                  });
                 }}
               >
                 -
@@ -176,19 +190,38 @@ const Card = () => {
             <div className="card-crud-btn plus">
               <button
                 onClick={() => {
-                  const updated = workout + 1;
-                  setWorkout(updated);
-                  updateWorkoutTime(updated);
+                  // setEditWorkout 如果是 null 值會是 => 初始值開始，如果不是則是從 workoutCount 開始
+                  setEditWorkout((prev) => {
+                    return prev === null
+                      ? fitnessData.workoutCount + 1
+                      : prev + 1;
+                  });
                 }}
               >
                 +
               </button>
             </div>
             <div className="card-crud-btn save">
-              <button>Save</button>
+              <button
+                onClick={() => {
+                  if (editWorkout !== null) {
+                    updateWorkoutTime(editWorkout); // 上傳 editWorkout 給 updateWorkoutTime(async fn)，使其將資料傳給 Firestore
+                    setEditWorkout(null); // 清空狀態
+                  }
+                }}
+              >
+                Save
+              </button>
             </div>
             <div className="card-crud-btn cancel">
-              <button>Cancel</button>
+              <button
+                onClick={() => {
+                  // 返回初始值
+                  setEditWorkout(null);
+                }}
+              >
+                Cancel
+              </button>
             </div>
           </div>
         </div>
@@ -199,6 +232,7 @@ const Card = () => {
           </div>
           <div className="card-item-body">
             {/*  依照 User 的輸入而改變 */}
+            {/* editWeight 如果是 null，顯示 firestore 的內容，不是的話則顯示更改的值 */}
             <h1>{fitnessData.proteinPercent}%</h1>
             <div className="protein-bar">
               <div
@@ -235,7 +269,6 @@ const Card = () => {
     </section>
   );
 };
-
 export default Card;
 
 // Card 背景
