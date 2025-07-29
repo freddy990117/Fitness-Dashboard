@@ -56,7 +56,10 @@ const Card = () => {
   const [editWeight, setEditWeight] = useState(null);
   const [editWorkout, setEditWorkout] = useState(null);
   const [editProtein, setEditProtein] = useState(null);
-
+  // 設定編輯蛋白質的狀態
+  const [isEditProtein, setIsEditProtein] = useState(false);
+  // 設定點選 Modify btn 後會自動跳到 input 視窗的 State
+  const proteinRef = useRef(null);
   // 將最新的 weight data 即時更新到 fireStore 上
   const updateWeight = async (newWeight) => {
     await updateDoc(doc(db, "users", "user1"), { weight: newWeight });
@@ -231,9 +234,44 @@ const Card = () => {
             <h1>Protein</h1>
           </div>
           <div className="card-item-body">
-            {/*  依照 User 的輸入而改變 */}
-            {/* editWeight 如果是 null，顯示 firestore 的內容，不是的話則顯示更改的值 */}
-            <h1>{fitnessData.proteinPercent}%</h1>
+            {/* 如果按下 Modify btn 則顯示 input，沒有的話則顯示 fireStore 上的 ProteinData */}
+            {isEditProtein ? (
+              <input
+                // 綁定 ref，用於 focus
+                ref={proteinRef}
+                type="number"
+                value={editProtein}
+                onChange={(e) => {
+                  setEditProtein(Number(e.target.value));
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    updateProtein(editProtein);
+                    setEditProtein(null);
+                    setIsEditProtein(false);
+                  }
+                }}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  fontSize: "2.5rem",
+                  fontWeight: "bolder",
+                  padding: "0.2rem",
+                  marginBottom: "0.3rem",
+                  border: "none",
+                  textAlign: "center",
+                }}
+              ></input>
+            ) : (
+              <h1>
+                {/* editProtein 如果是 null，顯示 firestore 的內容，不是的話則顯示更改的值 */}
+                {editProtein !== null
+                  ? editProtein
+                  : fitnessData.proteinPercent}
+                %
+              </h1>
+            )}
+
             <div className="protein-bar">
               <div
                 className="protein-bar-fill"
@@ -243,17 +281,45 @@ const Card = () => {
             </div>
           </div>
           <div className="card-crud-item">
-            <div className="card-crud-btn add">
+            {/* <div className="card-crud-btn add">
               <button>Add</button>
-            </div>
+            </div> */}
             <div className="card-crud-btn modify">
-              <button>Modify</button>
+              <button
+                onClick={() => {
+                  setIsEditProtein(true);
+                  setEditProtein(fitnessData.proteinPercent);
+                  // 等畫面更新後再 focus（用 setTimeout 是因為 isEditProtein 還沒切換完）
+                  setTimeout(() => {
+                    proteinRef.current?.focus();
+                  }, 0);
+                }}
+              >
+                Modify
+              </button>
             </div>
             <div className="card-crud-btn save">
-              <button>Save</button>
+              <button
+                onClick={() => {
+                  if (editProtein !== null) {
+                    updateProtein(editProtein);
+                    setEditProtein(null);
+                    setIsEditProtein(false);
+                  }
+                }}
+              >
+                Save
+              </button>
             </div>
             <div className="card-crud-btn cancel">
-              <button>Cancel</button>
+              <button
+                onClick={() => {
+                  setEditProtein(null);
+                  setIsEditProtein(false);
+                }}
+              >
+                Cancel
+              </button>
             </div>
           </div>
         </div>
