@@ -9,6 +9,7 @@ import {
   Title,
   Tooltip,
   Legend,
+  Filler,
 } from "chart.js";
 
 // 初始化 chart.js plugins
@@ -31,7 +32,7 @@ const Chart = () => {
         borderColor: "#47b5ff",
         backgroundColor: "rgba(71, 181, 255, 0.3)",
         borderWidth: 6,
-        fill: true,
+        Filler: true,
         tension: 0.6,
         pointRadius: 5,
       },
