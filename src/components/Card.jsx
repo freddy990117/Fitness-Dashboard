@@ -241,8 +241,19 @@ const Card = () => {
                 ref={proteinRef}
                 type="number"
                 value={editProtein}
+                // 設定最低與最高的值
+                min={0}
+                max={100}
                 onChange={(e) => {
-                  setEditProtein(Number(e.target.value));
+                  // 先取得輸入的值之後
+                  const current = Number(e.target.value);
+                  // 如果大於或是小於的話，就跳出提示視窗並結束，返回的是上次輸入的值
+                  if (current > 100 || current < 0) {
+                    alert("請輸入 0-100 的值");
+                    return;
+                  }
+                  // 沒有大於或是小於的話，就儲存輸入的值
+                  setEditProtein(current);
                 }}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {
@@ -275,20 +286,52 @@ const Card = () => {
             <div className="protein-bar">
               <div
                 className="protein-bar-fill"
-                // 依照 User 的輸入而改變
-                style={{ width: `${fitnessData.proteinPercent}%` }}
+                // 依照 User 的輸入而改變％數
+                style={{
+                  width: `${
+                    editProtein !== null
+                      ? editProtein
+                      : fitnessData.proteinPercent
+                  }%`,
+                }}
               ></div>
             </div>
           </div>
           <div className="card-crud-item">
-            {/* <div className="card-crud-btn add">
-              <button>Add</button>
-            </div> */}
+            <div className="card-crud-btn add">
+              <button
+                onClick={() => {
+                  setEditProtein((prev) => {
+                    const current =
+                      prev === null ? fitnessData.proteinPercent + 5 : prev + 5;
+                    // 設定最大不超過 100
+                    return Math.min(current, 100);
+                  });
+                }}
+              >
+                +
+              </button>
+            </div>
+            <div className="card-crud-btn minus">
+              <button
+                onClick={() => {
+                  setEditProtein((prev) => {
+                    const current =
+                      prev === null ? fitnessData.proteinPercent - 5 : prev - 5;
+                    // 設定最小不超過 0
+                    return Math.max(current, 0);
+                  });
+                }}
+              >
+                -
+              </button>
+            </div>
             <div className="card-crud-btn modify">
               <button
                 onClick={() => {
                   setIsEditProtein(true);
                   setEditProtein(fitnessData.proteinPercent);
+
                   // 等畫面更新後再 focus（用 setTimeout 是因為 isEditProtein 還沒切換完）
                   setTimeout(() => {
                     proteinRef.current?.focus();
@@ -336,20 +379,3 @@ const Card = () => {
   );
 };
 export default Card;
-
-// Card 背景
-// #ffffff 或 #dff6ff（淺藍白）
-// 文字
-// #06283d 深藍字
-// Icon / 數字
-// #47b5ff 活潑水藍
-// 補助線條
-// #8cc0de
-
-{
-  /* <div className="card-crud-item">
-  <div className="card-crud-btn minus">-</div>
-  <div className="card-crud-btn plus">+</div>
-  <div className="card-crud-btn finish">Finish</div>{" "}
-</div>; */
-}
