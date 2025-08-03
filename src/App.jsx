@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useEffect } from "react";
 import {
   BrowserRouter,
   Router,
@@ -15,6 +15,7 @@ const App = () => {
   const { user, loading } = useAuth();
 
   if (loading) return <p>載入中.....</p>;
+
   return (
     <div>
       <BrowserRouter>
@@ -37,3 +38,11 @@ const App = () => {
 };
 
 export default App;
+
+// ! 需要新增一個設定的頁面給第一次登入者使用，目前已從 Dashboard-setup -> feature/auth-reduect-setup -> feature/setup-page 開了 branch
+// 設定 Setup 畫面 UI + 邏輯
+// feature/setup-page
+// 實作 Firebase Auth 登入流程
+// feature/auth-flow
+// Dashboard 畫面 CRUD
+// feature/dashboard-crud
