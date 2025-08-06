@@ -4,59 +4,92 @@ import "../styles/setup.css";
 const Setup = () => {
   // 用來紀錄 User 輸入的值
   const [inputWeight, setInputWeight] = useState([]); // 會是很多天的數值，所以會是 Array
-  const [inputCount, setInputCount] = useState(1);
-  const [inputDate, setInputDate] = useState([]);
-  const [inputWorkoutCount, setInputWorkoutCount] = useState(0);
-  const [inputProtein, setInputProtein] = useState(0);
+  const [inputDate, setInputDate] = useState([]); // 日期
+  const [inputWorkout, setInputWorkout] = useState(0); // 訓練次數
+  const [inputProtein, setInputProtein] = useState(0); // 蛋白質攝取
   // 按下 button 會觸發的行為
-  const [edit, setEdit] = useState(false);
-  const [nextStep, setNextStep] = useState(1);
+  const [edit, setEdit] = useState(false); // 如果變成 true 代表全部編輯完成，會傳送到 fireStore 的狀態
+  const [fromStep, setFromStep] = useState(1); // 整體 form 的下一步狀態 （總共三步）
+  const [weightStep, setWeightStep] = useState(1); // 體重的下一步狀態 （總共七步）
   return (
     <div className="setup">
       <container className="form-setting">
+        <div className="step-bar">
+          <div className="bar">
+            {/* 先設定 h1 後面會改成 span */}
+            <h1>1</h1>
+            <h1>2</h1>
+            <h1>3</h1>
+          </div>
+        </div>
         <div className="weight-input form">
+          <div className="weight-bar">
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+            <span>4</span>
+            <span>5</span>
+            <span>6</span>
+            <span>7</span>
+          </div>
+          {/* Step 1 體重 */}
           <h1>輸入你最近的體重趨勢</h1>
-          <input
-            type="date"
-            id="date"
-            placeholder=""
-            value={inputDate}
-            onChange={(e) => setInputDate(Number(e.target.value))}
-          />
-          <input
-            type="number"
-            id="weight"
-            placeholder="至少選取七天，圖表比較好辨識呦！"
-          />
+          <div className="form-input">
+            <div className="date">
+              <h2>選取日期</h2>
+              <input
+                type="date"
+                id="date"
+                placeholder=""
+                value={inputDate}
+                onChange={(e) => setInputDate(e.target.value)}
+              />
+            </div>
+            <div className="weight">
+              <h2>體重</h2>
+              <input type="number" id="weight" placeholder="請輸入" />
+            </div>
+          </div>
           <div className="input-btn">
             <button
               onClick={() => {
-                setInputCount((prev) => prev + 1);
+                setWeightStep((prev) => prev - 1);
               }}
             >
-              儲存
+              上一步
             </button>
-
             <button
               onClick={() => {
-                setNextStep((prev) => prev + 1);
+                setWeightStep((prev) => prev + 1);
               }}
             >
               下一步
             </button>
+
+            {/* // TODO 前往下一個表格的按鈕，後面會做條件判斷，先 command */}
+            {/* <button
+              onClick={() => {
+                setFromStep((prev) => prev + 1);
+              }}
+            >
+              儲存
+            </button> */}
           </div>
         </div>
+        {/* Step 2 訓練次數 */}
         {/* <div className="count-input form">
           <h1>你今天訓練了嗎？</h1>
           <input type="number" placeholder="訓練次數" />
           <button
             onClick={() => {
-              setNextStep((prev) => prev + 1);
+              setFromStep((prev) => prev + 1);
             }}
           >
             下一步
           </button>
         </div>
+     
+        // Step 3 蛋白質攝取
         <div className="protein-input form">
           <h1>今天吃了多少所需的蛋白質？</h1>
           <input type="number" placeholder="蛋白質攝取" />
@@ -68,9 +101,6 @@ const Setup = () => {
             下一步
           </button>
         </div> */}
-        <div className="step-bar">
-          <div className="bar"></div>
-        </div>
       </container>
     </div>
   );
