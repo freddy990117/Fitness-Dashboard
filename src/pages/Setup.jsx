@@ -40,14 +40,13 @@ const Setup = () => {
               <input
                 type="date"
                 id="date"
-                placeholder=""
                 value={inputDate}
                 onChange={(e) => setInputDate(e.target.value)}
               />
             </div>
             <div className="weight">
               <h2>體重</h2>
-              <input type="number" id="weight" placeholder="請輸入" />
+              <input type="number" id="weight" placeholder="請輸入當時的體重" />
             </div>
           </div>
           <div className="input-btn">
@@ -56,14 +55,14 @@ const Setup = () => {
                 setWeightStep((prev) => prev - 1);
               }}
             >
-              上一步
+              {" < "}上一步
             </button>
             <button
               onClick={() => {
                 setWeightStep((prev) => prev + 1);
               }}
             >
-              下一步
+              下一步{" > "}
             </button>
 
             {/* // TODO 前往下一個表格的按鈕，後面會做條件判斷，先 command */}

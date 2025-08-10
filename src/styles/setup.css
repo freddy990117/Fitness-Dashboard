@@ -34,4 +34,62 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.setup .form-setting .weight-input {
+  display: flex;
+  align-items: center;
+}
+.setup .form-setting .weight-input .weight-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60%;
+  gap: 3rem;
+  margin: 1rem 0;
+}
+.setup .form-setting .weight-input .form-input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: wheat;
+  width: 50%;
+  height: 50%;
+}
+.setup .form-setting .weight-input .form-input .date,
+.setup .form-setting .weight-input .form-input .weight {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.setup .form-setting .weight-input .form-input .date h2,
+.setup .form-setting .weight-input .form-input .weight h2 {
+  align-items: center;
+  width: 30%;
+}
+.setup .form-setting .weight-input .form-input .date input,
+.setup .form-setting .weight-input .form-input .weight input {
+  width: 30%;
+  border-radius: 5px;
+  border: none;
+  text-decoration: none;
+  font-size: 0.9rem;
+  text-align: center;
+}
+.setup .form-setting .weight-input .form-input .date {
+  margin: 3rem 0;
+}
+.setup .form-setting .weight-input .input-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  width: 50%;
+  margin-top: 2rem;
+}
+.setup .form-setting .weight-input .input-btn button {
+  cursor: pointer;
+  font-size: 1.2rem;
+  border: 0;
+  border-radius: 5px;
+  padding: 0.1rem;
 }/*# sourceMappingURL=setup.css.map */
