@@ -16,21 +16,22 @@ const Setup = () => {
       <container className="form-setting">
         <div className="step-bar">
           <div className="bar">
-            {/* 先設定 h1 後面會改成 span */}
-            <h1>1</h1>
-            <h1>2</h1>
-            <h1>3</h1>
+            <div className="progress" id="progress"></div>
+            <div className="circle active">1</div>
+            <div className="circle">2</div>
+            <div className="circle">3</div>
           </div>
         </div>
         <div className="weight-input form">
           <div className="weight-bar">
-            <span>1</span>
-            <span>2</span>
-            <span>3</span>
-            <span>4</span>
-            <span>5</span>
-            <span>6</span>
-            <span>7</span>
+            <div className="progress"></div>
+            <div className="circle active">1</div>
+            <div className="circle">2</div>
+            <div className="circle">3</div>
+            <div className="circle">4</div>
+            <div className="circle">5</div>
+            <div className="circle">6</div>
+            <div className="circle">7</div>
           </div>
           {/* Step 1 體重 */}
           <h1>輸入你最近的體重趨勢</h1>

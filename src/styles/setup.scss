@@ -22,7 +22,37 @@
       justify-content: center;
       gap: 20%;
       height: 100%;
+      max-width: 100%;
       width: 100%;
+      font-size: 1.5rem;
+      position: relative;
+
+      .progress::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        background-color: #e0e0e0;
+        height: 5px;
+      }
+      .progress {
+        position: absolute;
+        width: 45%;
+        height: 5px;
+        transition: 0.3s ease;
+      }
+      .circle {
+        width: 30px;
+        height: 30px;
+        border: 3px solid #e0e0e0;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: 0.3s ease;
+        &.active {
+          border: 3px solid gray;
+        }
+      }
     }
     .form {
       border-radius: 0 0 20px 20px;
@@ -39,10 +69,38 @@
       .weight-bar {
         display: flex;
         align-items: center;
-        justify-content: center;
-        width: 60%;
+        justify-content: space-evenly;
+        width: 70%;
         gap: 3rem;
         margin: 1rem 0;
+        font-size: 1.2rem;
+        .progress::before {
+          content: "";
+          position: absolute;
+          width: 80%;
+          background-color: #e0e0e0;
+          height: 5px;
+          translate: 12.5%;
+        }
+        .progress {
+          position: absolute;
+          width: 45%;
+          height: 5px;
+          transition: 0.3s ease;
+        }
+        .circle {
+          width: 30px;
+          height: 30px;
+          border: 3px solid #e0e0e0;
+          border-radius: 10px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: 0.3s ease;
+          &.active {
+            border: 3px solid gray;
+          }
+        }
       }
       .form-input {
         display: flex;
