@@ -11,30 +11,36 @@ const Setup = () => {
   const [edit, setEdit] = useState(false); // 如果變成 true 代表全部編輯完成，會傳送到 fireStore 的狀態
   const [fromStep, setFromStep] = useState(1); // 整體 form 的下一步狀態 （總共三步）
   const [weightStep, setWeightStep] = useState(1); // 體重的下一步狀態 （總共七步）
+  const weightCount = 7;
   return (
     <div className="setup">
-      <container className="form-setting">
+      <div className="form-setting">
         <div className="step-bar">
-          <div className="bar">
+          {/* <div className="bar">
             <div className="progress" id="progress"></div>
-            <div className="circle active">1</div>
+            <div className="circle">1</div>
             <div className="circle">2</div>
             <div className="circle">3</div>
-          </div>
+          </div> */}
         </div>
         <div className="weight-input form">
           <div className="weight-bar">
-            <div className="progress"></div>
-            <div className="circle active">1</div>
-            <div className="circle">2</div>
-            <div className="circle">3</div>
-            <div className="circle">4</div>
-            <div className="circle">5</div>
-            <div className="circle">6</div>
-            <div className="circle">7</div>
+            <div
+              className="progress"
+              style={{
+                width: `calc(${((weightStep - 1) / (weightCount - 1)) * 93}% )`,
+              }}
+            ></div>
+            <div className={`circle ${weightStep >= 1 ? "active" : ""}`}>1</div>
+            <div className={`circle ${weightStep >= 2 ? "active" : ""}`}>2</div>
+            <div className={`circle ${weightStep >= 3 ? "active" : ""}`}>3</div>
+            <div className={`circle ${weightStep >= 4 ? "active" : ""}`}>4</div>
+            <div className={`circle ${weightStep >= 5 ? "active" : ""}`}>5</div>
+            <div className={`circle ${weightStep >= 6 ? "active" : ""}`}>6</div>
+            <div className={`circle ${weightStep >= 7 ? "active" : ""}`}>7</div>
           </div>
           {/* Step 1 體重 */}
-          <h1>輸入你最近的體重趨勢</h1>
+          <h1>輸入你最近的體重</h1>
           <div className="form-input">
             <div className="date">
               <h2>選取日期</h2>
@@ -53,14 +59,14 @@ const Setup = () => {
           <div className="input-btn">
             <button
               onClick={() => {
-                setWeightStep((prev) => prev - 1);
+                setWeightStep((prev) => Math.max(prev - 1, 1));
               }}
             >
               {" < "}上一步
             </button>
             <button
               onClick={() => {
-                setWeightStep((prev) => prev + 1);
+                setWeightStep((prev) => Math.min(prev + 1, 7));
               }}
             >
               下一步{" > "}
@@ -101,7 +107,7 @@ const Setup = () => {
             下一步
           </button>
         </div> */}
-      </container>
+      </div>
     </div>
   );
 };

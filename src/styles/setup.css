@@ -40,7 +40,7 @@
   position: absolute;
   width: 45%;
   height: 5px;
-  transition: 0.3s ease;
+  left: 0;
 }
 .setup .form-setting .bar .circle {
   width: 30px;
@@ -69,33 +69,37 @@
   align-items: center;
 }
 .setup .form-setting .weight-input .weight-bar {
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
   width: 70%;
   gap: 3rem;
   margin: 1rem 0;
   font-size: 1.2rem;
 }
-.setup .form-setting .weight-input .weight-bar .progress::before {
+.setup .form-setting .weight-input .weight-bar::before {
   content: "";
   position: absolute;
-  width: 80%;
+  width: 93%;
+  left: 3.7%;
   background-color: #e0e0e0;
   height: 5px;
-  translate: 12.5%;
 }
 .setup .form-setting .weight-input .weight-bar .progress {
   position: absolute;
-  width: 45%;
   height: 5px;
   transition: 0.3s ease;
+  left: 3.7%;
+  top: 50%;
+  background-color: green;
+  transform: translateY(-50%);
 }
 .setup .form-setting .weight-input .weight-bar .circle {
   width: 30px;
   height: 30px;
   border: 3px solid #e0e0e0;
-  border-radius: 10px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -148,5 +152,5 @@
   font-size: 1.2rem;
   border: 0;
   border-radius: 5px;
-  padding: 0.1rem;
+  padding: 0.1rem 0.5rem;
 }/*# sourceMappingURL=setup.css.map */
