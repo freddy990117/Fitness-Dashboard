@@ -34,7 +34,7 @@ const Setup = () => {
           </div>
         </div>
         {/* Step 1 體重紀錄 */}
-        <div className="weight-input form">
+        <div className={`form ${fromStep === 1 ? "weight-input" : "disable"}`}>
           <div className="weight-bar">
             <div
               className="progress"
@@ -69,19 +69,25 @@ const Setup = () => {
           </div>
         </div>
         {/* Step 2 訓練次數 */}
-        {/* <div className="count-input form">
+        <div className={`form ${fromStep === 2 ? "count-input" : "disable"}`}>
           <h1>你今天訓練了嗎？</h1>
           <input type="number" placeholder="訓練次數" />
-        </div> */}
+        </div>
         {/* // Step 3 蛋白質攝取 */}
-        {/* <div className="protein-input form">
+        <div className={`form ${fromStep === 3 ? "protein-input" : "disable"}`}>
           <h1>今天吃了多少所需的蛋白質？</h1>
           <input type="number" placeholder="蛋白質攝取" />
-        </div> */}
+        </div>
         <div className="input-btn">
           <button
             onClick={() => {
-              setWeightStep((prev) => Math.max(prev - 1, 1));
+              if (fromStep === 1) {
+                // Step 1 裡面走 weightStep
+                setWeightStep((prev) => Math.max(prev - 1, 1));
+              } else {
+                // 其他步驟直接切回上一步
+                setFromStep((prev) => Math.max(prev - 1, 1));
+              }
             }}
           >
             {" < "}上一步
@@ -97,7 +103,6 @@ const Setup = () => {
             下一步{" > "}
           </button>
 
-          {/* // TODO 前往下一個表格的按鈕，後面會做條件判斷，先 command */}
           <button
             className={`save ${
               weightStep >= weightCount ? "active" : "disable"
