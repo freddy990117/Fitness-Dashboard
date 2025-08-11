@@ -12,16 +12,26 @@ const Setup = () => {
   const [fromStep, setFromStep] = useState(1); // 整體 form 的下一步狀態 （總共三步）
   const [weightStep, setWeightStep] = useState(1); // 體重的下一步狀態 （總共七步）
   const weightCount = 7;
+  const formCount = 3;
   return (
     <div className="setup">
       <div className="form-setting">
         <div className="step-bar">
-          {/* <div className="bar">
-            <div className="progress" id="progress"></div>
-            <div className="circle">1</div>
-            <div className="circle">2</div>
-            <div className="circle">3</div>
-          </div> */}
+          <div
+            className="step-progress"
+            style={{
+              width: `calc(${((fromStep - 1) / (formCount - 1)) * 92}% )`,
+            }}
+          ></div>
+          <div className={`step-circle ${fromStep >= 1 ? "active" : ""}`}>
+            1
+          </div>
+          <div className={`step-circle ${fromStep >= 2 ? "active" : ""}`}>
+            2
+          </div>
+          <div className={`step-circle ${fromStep >= 3 ? "active" : ""}`}>
+            3
+          </div>
         </div>
         <div className="weight-input form">
           <div className="weight-bar">
@@ -65,6 +75,9 @@ const Setup = () => {
               {" < "}上一步
             </button>
             <button
+              className={`next ${
+                weightStep >= weightCount ? "disable" : "active"
+              }`}
               onClick={() => {
                 setWeightStep((prev) => Math.min(prev + 1, 7));
               }}
@@ -73,13 +86,16 @@ const Setup = () => {
             </button>
 
             {/* // TODO 前往下一個表格的按鈕，後面會做條件判斷，先 command */}
-            {/* <button
+            <button
+              className={`save ${
+                weightStep >= weightCount ? "active" : "disable"
+              }`}
               onClick={() => {
-                setFromStep((prev) => prev + 1);
+                setFromStep((prev) => Math.min(prev + 1, 3));
               }}
             >
               儲存
-            </button> */}
+            </button>
           </div>
         </div>
         {/* Step 2 訓練次數 */}
