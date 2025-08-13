@@ -12,6 +12,7 @@
     background-color: lightgreen;
     width: 60%;
     border-radius: 20px;
+    position: relative;
     .step-bar {
       width: 60%;
       height: 20vh;
@@ -136,9 +137,25 @@
         }
       }
     }
-    .count-input {
-    }
+    .count-input,
     .protein-input {
+      width: 100%;
+      height: 100%;
+      .form-input {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: wheat;
+        height: 50vh;
+        width: 100%;
+        h1 {
+          margin: 4rem;
+        }
+        input {
+          font-size: 1.3rem;
+          width: 35%;
+        }
+      }
     }
   }
   .input-btn {
@@ -148,6 +165,8 @@
     text-align: center;
     width: 50%;
     margin-top: 2rem;
+    position: absolute;
+    top: 80%;
     button {
       cursor: pointer;
       font-size: 1.2rem;

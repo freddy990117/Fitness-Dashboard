@@ -13,6 +13,7 @@
   background-color: lightgreen;
   width: 60%;
   border-radius: 20px;
+  position: relative;
 }
 .setup .form-setting .step-bar {
   width: 60%;
@@ -140,6 +141,29 @@
 .setup .form-setting .weight-input .form-input .date {
   margin: 3rem 0;
 }
+.setup .form-setting .count-input,
+.setup .form-setting .protein-input {
+  width: 100%;
+  height: 100%;
+}
+.setup .form-setting .count-input .form-input,
+.setup .form-setting .protein-input .form-input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: wheat;
+  height: 50vh;
+  width: 100%;
+}
+.setup .form-setting .count-input .form-input h1,
+.setup .form-setting .protein-input .form-input h1 {
+  margin: 4rem;
+}
+.setup .form-setting .count-input .form-input input,
+.setup .form-setting .protein-input .form-input input {
+  font-size: 1.3rem;
+  width: 35%;
+}
 .setup .input-btn {
   display: flex;
   align-items: center;
@@ -147,6 +171,8 @@
   text-align: center;
   width: 50%;
   margin-top: 2rem;
+  position: absolute;
+  top: 80%;
 }
 .setup .input-btn button {
   cursor: pointer;

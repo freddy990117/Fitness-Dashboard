@@ -64,19 +64,37 @@ const Setup = () => {
             </div>
             <div className="weight">
               <h2>體重</h2>
-              <input type="number" id="weight" placeholder="請輸入當時的體重" />
+              <input type="number" id="weight" placeholder="當時的體重" />
             </div>
           </div>
         </div>
         {/* Step 2 訓練次數 */}
         <div className={`form ${fromStep === 2 ? "count-input" : "disable"}`}>
-          <h1>你今天訓練了嗎？</h1>
-          <input type="number" placeholder="訓練次數" />
+          <div className="form-input">
+            <h1>今天訓練了幾次呢？</h1>
+            <input
+              id="workout"
+              name="workout"
+              type="number"
+              placeholder="訓練次數"
+              max={10}
+              min={0}
+            />
+          </div>
         </div>
         {/* // Step 3 蛋白質攝取 */}
         <div className={`form ${fromStep === 3 ? "protein-input" : "disable"}`}>
-          <h1>今天吃了多少所需的蛋白質？</h1>
-          <input type="number" placeholder="蛋白質攝取" />
+          <div className="form-input">
+            <h1>今天攝取了多了％的蛋白質呢？</h1>
+            <input
+              id="protein"
+              name="protein"
+              type="number"
+              placeholder="蛋白質攝取"
+              min={0}
+              max={100}
+            />
+          </div>
         </div>
         <div className="input-btn">
           <button
