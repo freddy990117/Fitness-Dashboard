@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "../styles/setup.css";
 
 const Setup = () => {
@@ -9,10 +9,41 @@ const Setup = () => {
   const [inputProtein, setInputProtein] = useState(0); // 蛋白質攝取
   // 按下 button 會觸發的行為
   const [edit, setEdit] = useState(false); // 如果變成 true 代表全部編輯完成，會傳送到 fireStore 的狀態
-  const [fromStep, setFromStep] = useState(1); // 整體 form 的下一步狀態 （總共三步）
+  const [formStep, setFormStep] = useState(1); // 整體 form 的下一步狀態 （總共三步）
   const [weightStep, setWeightStep] = useState(1); // 體重的下一步狀態 （總共七步）
   const weightCount = 7;
   const formCount = 3;
+  // 綁定按下 Enter 執行下一個表單的行為 (ref) + 當 formStep 改變時執行
+  const workoutRef = useRef(null);
+  const proteinRef = useRef(null);
+
+  const handleKeydown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+
+      if (formStep === 1) {
+        setWeightStep((prev) => Math.min(prev + 1, 7));
+        if (weightStep >= weightCount) {
+          setFormStep(2);
+        }
+      }
+      if (formStep === 2) {
+        setFormStep(3);
+      }
+      if (formStep === 3) {
+        setEdit("表單皆輸入完畢");
+      }
+    }
+  };
+  useEffect(() => {
+    if (formStep === 2 && workoutRef.current) {
+      workoutRef.current.focus();
+    }
+    if (formStep === 3 && proteinRef.current) {
+      proteinRef.current.focus();
+    }
+  }, [formStep]);
+
   return (
     <div className="setup">
       <div className="form-setting">
@@ -20,21 +51,21 @@ const Setup = () => {
           <div
             className="step-progress"
             style={{
-              width: `calc(${((fromStep - 1) / (formCount - 1)) * 92}% )`,
+              width: `calc(${((formStep - 1) / (formCount - 1)) * 92}% )`,
             }}
           ></div>
-          <div className={`step-circle ${fromStep >= 1 ? "active" : ""}`}>
+          <div className={`step-circle ${formStep >= 1 ? "active" : ""}`}>
             1
           </div>
-          <div className={`step-circle ${fromStep >= 2 ? "active" : ""}`}>
+          <div className={`step-circle ${formStep >= 2 ? "active" : ""}`}>
             2
           </div>
-          <div className={`step-circle ${fromStep >= 3 ? "active" : ""}`}>
+          <div className={`step-circle ${formStep >= 3 ? "active" : ""}`}>
             3
           </div>
         </div>
         {/* Step 1 體重紀錄 */}
-        <div className={`form ${fromStep === 1 ? "weight-input" : "disable"}`}>
+        <div className={`form ${formStep === 1 ? "weight-input" : "disable"}`}>
           <div className="weight-bar">
             <div
               className="progress"
@@ -64,12 +95,17 @@ const Setup = () => {
             </div>
             <div className="weight">
               <h2>體重</h2>
-              <input type="number" id="weight" placeholder="當時的體重" />
+              <input
+                type="number"
+                id="weight"
+                placeholder="當時的體重"
+                onKeyDown={handleKeydown}
+              />
             </div>
           </div>
         </div>
         {/* Step 2 訓練次數 */}
-        <div className={`form ${fromStep === 2 ? "count-input" : "disable"}`}>
+        <div className={`form ${formStep === 2 ? "count-input" : "disable"}`}>
           <div className="form-input">
             <h1>今天訓練了幾次呢？</h1>
             <input
@@ -79,11 +115,13 @@ const Setup = () => {
               placeholder="訓練次數"
               max={10}
               min={0}
+              ref={workoutRef}
+              onKeyDown={handleKeydown}
             />
           </div>
         </div>
         {/* // Step 3 蛋白質攝取 */}
-        <div className={`form ${fromStep === 3 ? "protein-input" : "disable"}`}>
+        <div className={`form ${formStep === 3 ? "protein-input" : "disable"}`}>
           <div className="form-input">
             <h1>今天攝取了多了％的蛋白質呢？</h1>
             <input
@@ -93,23 +131,26 @@ const Setup = () => {
               placeholder="蛋白質攝取"
               min={0}
               max={100}
+              ref={proteinRef}
             />
           </div>
         </div>
         <div className="input-btn">
+          {/* 上一步 */}
           <button
             onClick={() => {
-              if (fromStep === 1) {
+              if (formStep === 1) {
                 // Step 1 裡面走 weightStep
                 setWeightStep((prev) => Math.max(prev - 1, 1));
               } else {
                 // 其他步驟直接切回上一步
-                setFromStep((prev) => Math.max(prev - 1, 1));
+                setFormStep((prev) => Math.max(prev - 1, 1));
               }
             }}
           >
             {" < "}上一步
           </button>
+          {/* 下一步 */}
           <button
             className={`next ${
               weightStep >= weightCount ? "disable" : "active"
@@ -120,13 +161,13 @@ const Setup = () => {
           >
             下一步{" > "}
           </button>
-
+          {/* 儲存 */}
           <button
             className={`save ${
               weightStep >= weightCount ? "active" : "disable"
             }`}
             onClick={() => {
-              setFromStep((prev) => Math.min(prev + 1, 3));
+              setFormStep((prev) => Math.min(prev + 1, 3));
             }}
           >
             儲存
