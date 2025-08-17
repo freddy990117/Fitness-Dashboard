@@ -7,6 +7,17 @@ const Setup = () => {
   const [inputDate, setInputDate] = useState([]); // 日期
   const [inputWorkout, setInputWorkout] = useState(0); // 訓練次數
   const [inputProtein, setInputProtein] = useState(0); // 蛋白質攝取
+  // 取最後一個值出來給畫面呈現使用 (Weight)
+  const lastWeight =
+    inputWeight.length > 0 ? inputWeight[inputWeight.length - 1] : null;
+  // 上傳給 firebase 的值
+  const data = {
+    weight: lastWeight,
+    workoutCount: inputWorkout,
+    proteinPercent: inputProtein,
+  };
+  // 確定輸入的值
+  const [currentValue, setCurrentValue] = useState("");
   // 按下 button 會觸發的行為
   const [edit, setEdit] = useState(false); // 如果變成 true 代表全部編輯完成，會傳送到 fireStore 的狀態
   const [formStep, setFormStep] = useState(1); // 整體 form 的下一步狀態 （總共三步）
@@ -23,6 +34,9 @@ const Setup = () => {
 
       if (formStep === 1) {
         setWeightStep((prev) => Math.min(prev + 1, 7));
+        setInputWeight((prev) => [...prev, currentValue]);
+        setCurrentValue("");
+
         if (weightStep >= weightCount) {
           setFormStep(2);
         }
@@ -100,6 +114,12 @@ const Setup = () => {
                 id="weight"
                 placeholder="當時的體重"
                 onKeyDown={handleKeydown}
+                min={0}
+                max={200}
+                value={currentValue}
+                onChange={(e) => {
+                  setCurrentValue(e.target.value);
+                }}
               />
             </div>
           </div>
@@ -116,6 +136,9 @@ const Setup = () => {
               max={10}
               min={0}
               ref={workoutRef}
+              onChange={(e) => {
+                setInputWorkout(e.target.value);
+              }}
               onKeyDown={handleKeydown}
             />
           </div>
@@ -132,6 +155,10 @@ const Setup = () => {
               min={0}
               max={100}
               ref={proteinRef}
+              onChange={(e) => {
+                setInputProtein(e.target.value);
+              }}
+              onKeyDown={handleKeydown}
             />
           </div>
         </div>
@@ -157,6 +184,8 @@ const Setup = () => {
             }`}
             onClick={() => {
               setWeightStep((prev) => Math.min(prev + 1, 7));
+              setInputWeight((prev) => [...prev, currentValue]);
+              setCurrentValue("");
             }}
           >
             下一步{" > "}
@@ -168,6 +197,8 @@ const Setup = () => {
             }`}
             onClick={() => {
               setFormStep((prev) => Math.min(prev + 1, 3));
+              setInputWeight((prev) => [...prev, currentValue]);
+              setCurrentValue("");
             }}
           >
             儲存
