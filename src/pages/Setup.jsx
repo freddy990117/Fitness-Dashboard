@@ -18,6 +18,7 @@ const Setup = () => {
   };
   // 確定輸入的值
   const [currentValue, setCurrentValue] = useState("");
+  const [currentDate, setCurrentDate] = useState("");
   // 按下 button 會觸發的行為
   const [edit, setEdit] = useState(false); // 如果變成 true 代表全部編輯完成，會傳送到 fireStore 的狀態
   const [formStep, setFormStep] = useState(1); // 整體 form 的下一步狀態 （總共三步）
@@ -33,9 +34,14 @@ const Setup = () => {
       e.preventDefault();
 
       if (formStep === 1) {
+        // Setp.1 Weight Step 有七步
         setWeightStep((prev) => Math.min(prev + 1, 7));
+        // 確定將輸入的值傳給正確的 State
         setInputWeight((prev) => [...prev, currentValue]);
+        setInputDate((prev) => [...prev, currentDate]);
+        // 清空輸入的狀態
         setCurrentValue("");
+        setCurrentDate("");
 
         if (weightStep >= weightCount) {
           setFormStep(2);
@@ -103,8 +109,9 @@ const Setup = () => {
               <input
                 type="date"
                 id="date"
-                value={inputDate}
-                onChange={(e) => setInputDate(e.target.value)}
+                // value 綁定「快取」的值，按下 Enter 會傳給「正確」的State
+                value={currentDate}
+                onChange={(e) => setCurrentDate(e.target.value)}
               />
             </div>
             <div className="weight">
@@ -113,9 +120,11 @@ const Setup = () => {
                 type="number"
                 id="weight"
                 placeholder="當時的體重"
+                // 綁定 Enter 事件
                 onKeyDown={handleKeydown}
                 min={0}
                 max={200}
+                // value 綁定「快取」的值，按下 Enter 會傳給「正確」的State
                 value={currentValue}
                 onChange={(e) => {
                   setCurrentValue(e.target.value);
@@ -136,10 +145,11 @@ const Setup = () => {
               max={10}
               min={0}
               ref={workoutRef}
+              // 綁定 Enter 事件
+              onKeyDown={handleKeydown}
               onChange={(e) => {
                 setInputWorkout(e.target.value);
               }}
-              onKeyDown={handleKeydown}
             />
           </div>
         </div>
@@ -155,10 +165,11 @@ const Setup = () => {
               min={0}
               max={100}
               ref={proteinRef}
+              // 綁定 Enter 事件
+              onKeyDown={handleKeydown}
               onChange={(e) => {
                 setInputProtein(e.target.value);
               }}
-              onKeyDown={handleKeydown}
             />
           </div>
         </div>
@@ -183,9 +194,12 @@ const Setup = () => {
               weightStep >= weightCount ? "disable" : "active"
             }`}
             onClick={() => {
-              setWeightStep((prev) => Math.min(prev + 1, 7));
+              // 確定將輸入的值傳給正確的 State
               setInputWeight((prev) => [...prev, currentValue]);
+              setInputDate((prev) => [...prev, currentDate]);
+              // 清空輸入的狀態
               setCurrentValue("");
+              setCurrentDate("");
             }}
           >
             下一步{" > "}
