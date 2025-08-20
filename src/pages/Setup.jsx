@@ -19,6 +19,8 @@ const Setup = () => {
   // 確定輸入的值
   const [currentValue, setCurrentValue] = useState("");
   const [currentDate, setCurrentDate] = useState("");
+  // !如果輸入框沒有值時觸發
+  const [error, setError] = useState(false);
   // 按下 button 會觸發的行為
   const [edit, setEdit] = useState(false); // 如果變成 true 代表全部編輯完成，會傳送到 fireStore 的狀態
   const [formStep, setFormStep] = useState(1); // 整體 form 的下一步狀態 （總共三步）
@@ -29,10 +31,10 @@ const Setup = () => {
   const workoutRef = useRef(null);
   const proteinRef = useRef(null);
 
+  // 按下「下一步」與「儲存」的事件
   const handleKeydown = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
-
       if (formStep === 1) {
         // Setp.1 Weight Step 有七步
         setWeightStep((prev) => Math.min(prev + 1, 7));
@@ -42,7 +44,6 @@ const Setup = () => {
         // 清空輸入的狀態
         setCurrentValue("");
         setCurrentDate("");
-
         if (weightStep >= weightCount) {
           setFormStep(2);
         }
@@ -55,6 +56,10 @@ const Setup = () => {
       }
     }
   };
+
+  // 輸入框沒有值時觸發
+
+  // 當表單發生改變時觸發
   useEffect(() => {
     if (formStep === 2 && workoutRef.current) {
       workoutRef.current.focus();
@@ -107,6 +112,7 @@ const Setup = () => {
             <div className="date">
               <h2>選取日期</h2>
               <input
+                className={error ? "error" : ""}
                 type="date"
                 id="date"
                 // value 綁定「快取」的值，按下 Enter 會傳給「正確」的State
@@ -117,6 +123,7 @@ const Setup = () => {
             <div className="weight">
               <h2>體重</h2>
               <input
+                className={error ? "error" : ""}
                 type="number"
                 id="weight"
                 placeholder="當時的體重"
