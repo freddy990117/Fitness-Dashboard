@@ -31,34 +31,55 @@ const Setup = () => {
   const workoutRef = useRef(null);
   const proteinRef = useRef(null);
 
-  // 按下「下一步」與「儲存」的事件
+  // 用於檢測按下鍵盤是否為 Enter 的行為
   const handleKeydown = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      if (formStep === 1) {
-        // Setp.1 Weight Step 有七步
-        setWeightStep((prev) => Math.min(prev + 1, 7));
-        // 確定將輸入的值傳給正確的 State
-        setInputWeight((prev) => [...prev, currentValue]);
-        setInputDate((prev) => [...prev, currentDate]);
-        // 清空輸入的狀態
-        setCurrentValue("");
-        setCurrentDate("");
-        if (weightStep >= weightCount) {
-          setFormStep(2);
-        }
-      }
-      if (formStep === 2) {
-        setFormStep(3);
-      }
-      if (formStep === 3) {
-        setEdit("表單皆輸入完畢");
-      }
+      handleNextStep();
     }
   };
 
-  // 輸入框沒有值時觸發
+  // 按下「下一步」與「儲存」的事件
+  const handleNextStep = () => {
+    if (formStep === 1) {
+      // 如果輸入框的「體重與日期」是空值，則跳出錯誤
+      if (!currentDate || !currentValue) {
+        setError(true);
+        return;
+      }
+      // 將輸入的值加入到 array 中
+      setError(false);
+      setInputWeight((prev) => [...prev, currentValue]);
+      setInputDate((prev) => [...prev, currentDate]);
+      setCurrentValue("");
+      setCurrentDate("");
+      // 如果 Weight 表單填寫完畢 （大於7），前往下一個表單
+      if (weightStep < weightCount) {
+        setWeightStep((prev) => prev + 1);
+      } else {
+        setFormStep(2);
+      }
+    }
 
+    if (formStep === 2) {
+      // 如果值是空的，跳出錯誤（輸入的值會在 input 中使用 onChange 獲取，這邊主要設定邏輯）
+      if (!inputWorkout) {
+        setError(true);
+        return;
+      }
+      setError(false);
+      setFormStep(3);
+    }
+    if (formStep === 3) {
+      // 如果值是空的，跳出錯誤（輸入的值會在 input 中使用 onChange 獲取，這邊主要設定邏輯）
+      if (!inputProtein) {
+        setError(true);
+        return;
+      }
+      setError(false);
+      setEdit("Finish");
+    }
+  };
   // 當表單發生改變時觸發
   useEffect(() => {
     if (formStep === 2 && workoutRef.current) {
@@ -145,6 +166,7 @@ const Setup = () => {
           <div className="form-input">
             <h1>今天訓練了幾次呢？</h1>
             <input
+              className={error ? "error" : ""}
               id="workout"
               name="workout"
               type="number"
@@ -165,6 +187,7 @@ const Setup = () => {
           <div className="form-input">
             <h1>今天攝取了多了％的蛋白質呢？</h1>
             <input
+              className={error ? "error" : ""}
               id="protein"
               name="protein"
               type="number"
@@ -201,12 +224,8 @@ const Setup = () => {
               weightStep >= weightCount ? "disable" : "active"
             }`}
             onClick={() => {
-              // 確定將輸入的值傳給正確的 State
-              setInputWeight((prev) => [...prev, currentValue]);
-              setInputDate((prev) => [...prev, currentDate]);
-              // 清空輸入的狀態
-              setCurrentValue("");
-              setCurrentDate("");
+              // 榜定「下一步」事件
+              handleNextStep();
             }}
           >
             下一步{" > "}
@@ -217,9 +236,8 @@ const Setup = () => {
               weightStep >= weightCount ? "active" : "disable"
             }`}
             onClick={() => {
-              setFormStep((prev) => Math.min(prev + 1, 3));
-              setInputWeight((prev) => [...prev, currentValue]);
-              setCurrentValue("");
+              // 榜定「下一步」事件
+              handleNextStep();
             }}
           >
             儲存
