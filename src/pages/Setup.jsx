@@ -185,7 +185,7 @@ const Setup = () => {
                 id="date"
                 // value 綁定「快取」的值，按下 Enter 會傳給「正確」的State
                 value={currentDate}
-                onChange={(e) => setCurrentDate(e.target.value)}
+                onChange={(e) => setCurrentDate((e.target.value))}
               />
             </div>
             <div className="weight">
@@ -202,7 +202,7 @@ const Setup = () => {
                 // value 綁定「快取」的值，按下 Enter 會傳給「正確」的State
                 value={currentValue}
                 onChange={(e) => {
-                  setCurrentValue(e.target.value);
+                  setCurrentValue(Number(e.target.value));
                 }}
               />
             </div>
