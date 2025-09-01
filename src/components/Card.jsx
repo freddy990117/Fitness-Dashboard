@@ -46,12 +46,11 @@ const Card = () => {
     proteinPercent: 0,
     workoutCount: 0,
   });
-  // 初始 User 體重、訓練次數與蛋白質的初始值（後續透過 useEffect doc 取得即時的資料,並在 button 設定 onClick，即時變更畫面顯示）
-  //（目前這邊是還沒有用到的 State，看後面需不需要更改）
-  const [weight, setWeight] = useState(0);
-  const [workout, setWorkout] = useState(0);
-  const [protein, setProtein] = useState(0);
-
+  // 提供給 chart 的 data
+  const [chartData, setChartData] = useState({
+    inputWeight: [],
+    inputDate: [],
+  });
   // 放置快取的資料，當按下 save 時在進行變更
   const [editWeight, setEditWeight] = useState(null);
   const [editWorkout, setEditWorkout] = useState(null);
@@ -88,10 +87,8 @@ const Card = () => {
           // data() 以物件的方式返回資料 {..,..,..}
           const data = doc.data();
           // 設定值給各項參數
-          setFitnessData(data);
-          setWeight(data.weight);
-          setWorkout(data.workoutCount);
-          setProtein(data.protein);
+          setFitnessData(data.dashboard);
+          setChartData(data.history);
         }
       }
     );
@@ -368,7 +365,7 @@ const Card = () => {
         </div>
         <div className="card-bar card-weight-change">
           <h1>Weight Trend Line </h1>
-          <Chart />
+          <Chart chartData={chartData} />
         </div>
         <div className="card-bar card-tip">
           <h1>Health Tip</h1>
