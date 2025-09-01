@@ -2,8 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 import "../styles/setup.css";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../services/firebase";
-
+import { useNavigate } from "react-router-dom";
 const Setup = () => {
+  // 加入導覽列
+  const navigate = useNavigate();
   // 用來紀錄 User 輸入的值
   const [inputWeight, setInputWeight] = useState([]); // 會是很多天的數值，所以會是 Array
   const [inputDate, setInputDate] = useState([]); // 日期
@@ -61,7 +63,7 @@ const Setup = () => {
     }
   };
 
-  // 按下「下一步」與「儲存」的事件
+  // 按下「下一步」的事件
   const handleNextStep = () => {
     if (formStep === 1) {
       // 如果輸入框的「體重與日期」是空值，則跳出錯誤
@@ -92,6 +94,7 @@ const Setup = () => {
       setError(false);
       setFormStep(3);
     }
+
     if (formStep === 3) {
       // 如果值是空的，跳出錯誤（輸入的值會在 input 中使用 onChange 獲取，這邊主要設定邏輯）
       if (!inputProtein) {
@@ -103,6 +106,8 @@ const Setup = () => {
       setEdit("Finish");
       // 上傳資料到雲端上
       saveToFirestore("user1", showDataOnDashboard, data);
+      // 到 formStep 3 完成，上傳資料後導覽到 dashboard
+      navigate("/dashboard");
     }
   };
 
@@ -115,6 +120,22 @@ const Setup = () => {
       proteinRef.current.focus();
     }
   }, [formStep]);
+
+  // 按下「儲存」的事件
+  const handleSave = async () => {
+    if (!inputProtein || !inputWorkout || inputWeight.length === 0) {
+      setError(true);
+      return;
+    }
+    setError(false);
+    setEdit("Finish");
+    try {
+      await saveToFirestore("user1", showDataOnDashboard, data);
+      navigate("/dashboard");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="setup">
@@ -250,7 +271,7 @@ const Setup = () => {
               weightStep >= weightCount ? "disable" : "active"
             }`}
             onClick={() => {
-              // 榜定「下一步」事件
+              // 綁定「下一步」事件
               handleNextStep();
             }}
           >
@@ -262,8 +283,8 @@ const Setup = () => {
               weightStep >= weightCount ? "active" : "disable"
             }`}
             onClick={() => {
-              // 榜定「下一步」事件
-              handleNextStep();
+              // 綁定「下一步」事件
+              handleSave();
             }}
           >
             儲存
