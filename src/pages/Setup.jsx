@@ -224,7 +224,7 @@ const Setup = () => {
               // 綁定 Enter 事件
               onKeyDown={handleKeydown}
               onChange={(e) => {
-                setInputWorkout(e.target.value);
+                setInputWorkout(Number(e.target.value));
               }}
             />
           </div>
@@ -245,7 +245,7 @@ const Setup = () => {
               // 綁定 Enter 事件
               onKeyDown={handleKeydown}
               onChange={(e) => {
-                setInputProtein(e.target.value);
+                setInputProtein(Number(e.target.value));
               }}
             />
           </div>
@@ -283,8 +283,9 @@ const Setup = () => {
               weightStep >= weightCount ? "active" : "disable"
             }`}
             onClick={() => {
-              // 綁定「下一步」事件
-              handleSave();
+              formStep === 1 || formStep === 2
+                ? handleNextStep()
+                : handleSave();
             }}
           >
             儲存
