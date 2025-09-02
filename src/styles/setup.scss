@@ -1,0 +1,199 @@
+.setup {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: antiquewhite;
+  .form-setting {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: lightgreen;
+    width: 60%;
+    border-radius: 20px;
+    position: relative;
+    .step-bar {
+      width: 60%;
+      height: 20vh;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 100%;
+      position: relative;
+      font-size: 1.5rem;
+      &::before {
+        content: "";
+        position: absolute;
+        width: 92%;
+        background-color: #e0e0e0;
+        height: 5px;
+        left: 4%;
+      }
+      .step-progress {
+        position: absolute;
+        width: 100%;
+        height: 5px;
+        left: 4%;
+        transition: 0.3s ease;
+        background-color: green;
+      }
+      .step-circle {
+        width: 30px;
+        height: 30px;
+        border: 3px solid #e0e0e0;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: 0.3s ease;
+        &.active {
+          border: 3px solid green;
+        }
+      }
+    }
+    .form {
+      border-radius: 0 0 20px 20px;
+      background-color: lightpink;
+      height: 50vh;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      &.disable {
+        display: none;
+      }
+    }
+    .weight-input {
+      display: flex;
+      align-items: center;
+      .weight-bar {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 70%;
+        gap: 3rem;
+        margin: 1rem 0;
+        font-size: 1.2rem;
+        &::before {
+          content: "";
+          position: absolute;
+          width: 93%;
+          left: 3.7%;
+          background-color: #e0e0e0;
+          height: 5px;
+        }
+        .progress {
+          position: absolute;
+          height: 5px;
+          transition: 0.3s ease;
+          left: 3.7%;
+          top: 50%;
+          background-color: green;
+          transform: translateY(-50%);
+        }
+        .circle {
+          width: 30px;
+          height: 30px;
+          border: 3px solid #e0e0e0;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: 0.3s ease;
+          &.active {
+            border: 3px solid green;
+          }
+        }
+      }
+      .form-input {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: wheat;
+        width: 50%;
+        height: 50%;
+        .date,
+        .weight {
+          display: flex;
+          justify-content: center;
+          width: 100%;
+          h2 {
+            align-items: center;
+            width: 30%;
+          }
+          input {
+            width: 30%;
+            border-radius: 5px;
+            border: none;
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-align: center;
+          }
+        }
+        .date {
+          margin: 3rem 0;
+        }
+      }
+    }
+    .count-input,
+    .protein-input {
+      width: 100%;
+      height: 100%;
+      .form-input {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: wheat;
+        height: 50vh;
+        width: 100%;
+        h1 {
+          margin: 4rem;
+        }
+        input {
+          font-size: 1.3rem;
+          width: 35%;
+        }
+      }
+    }
+  }
+  .input-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    width: 50%;
+    margin-top: 2rem;
+    position: absolute;
+    top: 80%;
+    button {
+      cursor: pointer;
+      font-size: 1.2rem;
+      border: 0;
+      border-radius: 5px;
+      padding: 0.1rem 0.5rem;
+    }
+    .save {
+      &.disable {
+        display: none;
+        background-color: gray;
+        pointer-events: none; // 讓它不能點
+        cursor: not-allowed;
+        transition: 0.3 ease;
+      }
+      &.active {
+        display: block;
+        background-color: green;
+      }
+    }
+    .next {
+      &.disable {
+        display: none;
+      }
+      &.active {
+        display: block;
+      }
+    }
+  }
+}
