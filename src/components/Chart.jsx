@@ -22,13 +22,14 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-const Chart = () => {
+// 從 Card 接收的資料顯示在儀表上
+const Chart = ({ chartData }) => {
   const data = {
-    labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+    labels: chartData.inputDate,
     datasets: [
       {
         label: "Weight (kg)",
-        data: [78.3, 78.5, 78.6, 78.8, 79, 78.9, 79],
+        data: chartData.inputWeight,
         borderColor: "#47b5ff",
         backgroundColor: "rgba(71, 181, 255, 0.3)",
         borderWidth: 6,
