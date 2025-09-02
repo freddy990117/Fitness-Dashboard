@@ -29,6 +29,7 @@
     flex: 9;
     .card-item {
       display: flex;
+      position: relative;
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
@@ -71,6 +72,26 @@
           }
         }
       }
+      .card-crud-item {
+        position: absolute;
+        right: -28%;
+        top: 5%;
+        .card-crud-btn {
+          padding: 0.2rem;
+          margin-bottom: 0.2rem;
+          border-radius: 10px;
+          background-color: white;
+          width: 110%;
+          text-align: center;
+          button {
+            font-size: 1.2rem;
+            width: 100%;
+            border: none;
+            background-color: white;
+            cursor: pointer;
+          }
+        }
+      }
     }
     .card-bar {
       height: 80%;
@@ -108,5 +129,28 @@
         font-size: 2rem;
       }
     }
+  }
+}
+
+.error {
+  border: 2px solid red;
+  animation: shake 0.3s ease;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  75% {
+    transform: translateX(-5px);
+  }
+  100% {
+    transform: translateX(0);
   }
 }

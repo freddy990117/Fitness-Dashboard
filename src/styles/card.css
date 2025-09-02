@@ -23,6 +23,7 @@
 }
 .card-container .card-body .card-item {
   display: flex;
+  position: relative;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
@@ -64,6 +65,26 @@
   width: 0%;
   transition: width 0.3s ease;
 }
+.card-container .card-body .card-item .card-crud-item {
+  position: absolute;
+  right: -28%;
+  top: 5%;
+}
+.card-container .card-body .card-item .card-crud-item .card-crud-btn {
+  padding: 0.2rem;
+  margin-bottom: 0.2rem;
+  border-radius: 10px;
+  background-color: white;
+  width: 110%;
+  text-align: center;
+}
+.card-container .card-body .card-item .card-crud-item .card-crud-btn button {
+  font-size: 1.2rem;
+  width: 100%;
+  border: none;
+  background-color: white;
+  cursor: pointer;
+}
 .card-container .card-body .card-bar {
   height: 80%;
   width: 90%;
@@ -99,4 +120,27 @@
 }
 .card-container .card-body .card-tip h2 {
   font-size: 2rem;
+}
+
+.error {
+  border: 2px solid red;
+  animation: shake 0.3s ease;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  75% {
+    transform: translateX(-5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }/*# sourceMappingURL=card.css.map */
