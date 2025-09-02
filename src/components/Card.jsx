@@ -61,21 +61,17 @@ const Card = () => {
   const proteinRef = useRef(null);
   // 將最新的 weight data 即時更新到 fireStore 上
   const updateWeight = async (newWeight) => {
-    await updateDoc(doc(db, "users", "user1"), {
-      "dashboard.weight": newWeight,
-    });
+    await updateDoc(doc(db, "users", "user1"), { weight: newWeight });
   };
   // 將最新的 workoutCount data 即時更新到 fireStore 上
   const updateWorkoutTime = async (newWorkoutTime) => {
     await updateDoc(doc(db, "users", "user1"), {
-      "dashboard.workoutCount": newWorkoutTime,
+      workoutCount: newWorkoutTime,
     });
   };
   // 將最新的 proteinPercent data 即時更新到 fireStore 上
   const updateProtein = async (newProtein) => {
-    await updateDoc(doc(db, "users", "user1"), {
-      "dashboard.proteinPercent": newProtein,
-    });
+    await updateDoc(doc(db, "users", "user1"), { proteinPercent: newProtein });
   };
 
   // 在畫面 Render 後執行，使用 onSnapshot 監聽 Firestore 的變化，自動推送資料至 state，因此無需指定 dependency
