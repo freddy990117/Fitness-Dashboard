@@ -1,5 +1,7 @@
 import { React, useState } from "react";
 // 帶入 firebase
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../services/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../services/firebase";
 import { useNavigate } from "react-router-dom";
@@ -12,16 +14,34 @@ export const Login = () => {
   const [errorMessage, setErrorMessage] = useState("");
   // 設定提交資料與驗證的函式
   const handleLoginSubmit = async (e) => {
-    // 終止表單的預設送出行為
     e.preventDefault();
     try {
-      // signInWithEmailAndPassword 是 firebase 提供的非同步函式，會自動比對 email,password
-      await signInWithEmailAndPassword(auth, email, password);
-      setErrorMessage("");
-      // 比對成功在執行下一步（正確就跳轉頁面）
-      navigate("/dashboard");
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      // 回傳使用者的物件
+      const user = userCredential.user;
+      // 拿到使用者的資料(users 子集合中的 uid，uid 會是 FireStore 自己生成的唯一值)
+      const docRef = doc(db, "users", user.uid);
+      // 取得內部資料
+      const docSnap = await getDoc(docRef);
+      // 如果資料存在，則開始判斷
+      if (docSnap.exists()) {
+        const userData = docSnap.data();
+        if (userData.isSetupComplete) {
+          navigate("/dashboard"); // 已設定 → 去 Dashboard
+        } else {
+          navigate("/setup"); // 第一次登入 → 去 Setup
+        }
+      } else {
+        // 完全沒有資料 → 視為第一次登入
+        navigate("/setup");
+      }
     } catch (error) {
       setErrorMessage(error.message);
+      console.log(error);
     }
   };
   return (
