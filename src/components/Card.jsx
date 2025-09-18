@@ -9,9 +9,14 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 // import FireStore
 import { doc, onSnapshot, updateDoc } from "firebase/firestore";
-import { db } from "../services/firebase";
+import { db, auth } from "../services/firebase";
 
 const Card = () => {
+  const user = auth.currentUser;
+  if (!user) {
+    console.log("尚未登入使用者");
+    return;
+  }
   // HealthTips
   const healthTips = [
     "每天至少喝足 2000c.c 水，維持身體代謝與健康。",
@@ -61,19 +66,19 @@ const Card = () => {
   const proteinRef = useRef(null);
   // 將最新的 weight data 即時更新到 fireStore 上
   const updateWeight = async (newWeight) => {
-    await updateDoc(doc(db, "users", "user1"), {
+    await updateDoc(doc(db, "users", user.id), {
       "dashboard.weight": newWeight,
     });
   };
   // 將最新的 workoutCount data 即時更新到 fireStore 上
   const updateWorkoutTime = async (newWorkoutTime) => {
-    await updateDoc(doc(db, "users", "user1"), {
+    await updateDoc(doc(db, "users", user.id), {
       "dashboard.workoutCount": newWorkoutTime,
     });
   };
   // 將最新的 proteinPercent data 即時更新到 fireStore 上
   const updateProtein = async (newProtein) => {
-    await updateDoc(doc(db, "users", "user1"), {
+    await updateDoc(doc(db, "users", user.id), {
       "dashboard.proteinPercent": newProtein,
     });
   };
@@ -82,8 +87,8 @@ const Card = () => {
   useEffect(() => {
     // onSnapshot 是官方提供的函式，用於「即時」監聽資料庫的變化，第一個參數是「指定要使用哪一筆資料」
     const unsub = onSnapshot(
-      // 取得的資料是 users (Collection) 內 user1 (Document) 的 Database
-      doc(db, "users", "user1"),
+      // 取得的資料是 users (Collection) 內 user.id (Document) 的 Database
+      doc(db, "users", user.uid),
       // onSnapshot 第二個參數是一個 callBack fn
       (doc) => {
         // exists 檢查資料庫中是否有這筆資料

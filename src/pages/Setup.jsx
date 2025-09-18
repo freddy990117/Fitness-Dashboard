@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import "../styles/setup.css";
 import { doc, setDoc } from "firebase/firestore";
-import { db } from "../services/firebase";
+import { db, auth } from "../services/firebase";
 import { useNavigate } from "react-router-dom";
 const Setup = () => {
   // 加入導覽列
@@ -41,14 +41,21 @@ const Setup = () => {
   };
 
   // 當表單都輸入完畢後，將資料更新到 fireStore 上
-  const saveToFirestore = async (userid, showDataOnDashboard, data) => {
+  const saveToFirestore = async (uid, showDataOnDashboard, data) => {
     try {
-      // 存放使用者的資料，setDoc 覆蓋原本的值
-      await setDoc(doc(db, "users", userid), {
-        dashboard: showDataOnDashboard, // 給 Dashboard 顯示
-        history: data, // 上傳七天份的資料給 fireStore（後續給 Chart 引用）
-        createdAt: new Date().toISOString(),
-      });
+      const docRef = doc(db, "users", uid);
+      await setDoc(
+        docRef,
+        {
+          ...data,
+          users: uid,
+          dashboard: showDataOnDashboard,
+          history: data,
+          createdAt: new Date().toISOString(),
+          isSetupComplete: true, // 這邊順便更新狀態
+        },
+        { merge: true }
+      );
       console.log("Firestore 更新成功！");
     } catch (error) {
       console.error("上傳失敗", error);
@@ -104,10 +111,18 @@ const Setup = () => {
       setError(false);
       // 表單完成
       setEdit("Finish");
-      // 上傳資料到雲端上
-      saveToFirestore("user1", showDataOnDashboard, data);
-      // 到 formStep 3 完成，上傳資料後導覽到 dashboard
-      navigate("/dashboard");
+      // // 上傳資料到雲端上
+      // saveToFirestore(user, showDataOnDashboard, data);
+      // // 到 formStep 3 完成，上傳資料後導覽到 dashboard
+      // navigate("/dashboard");
+
+      const user = auth.currentUser; //取得登入的使用者
+      if (user && user.uid) {
+        saveToFirestore(user.uid, showDataOnDashboard, data);
+        navigate("/dashboard");
+      } else {
+        console.error("沒有登入使用者，無法儲存資料");
+      }
     }
   };
 
@@ -123,15 +138,18 @@ const Setup = () => {
 
   // 按下「儲存」的事件
   const handleSave = async () => {
+    const user = auth.currentUser;
     if (!inputProtein || !inputWorkout || inputWeight.length === 0) {
       setError(true);
       return;
     }
     setError(false);
-    setEdit("Finish");
+    setEdit(true); // 完成設定！！
     try {
-      await saveToFirestore("user1", showDataOnDashboard, data);
-      navigate("/dashboard");
+      if (user.uid) {
+        await saveToFirestore(user.uid, showDataOnDashboard, data);
+        navigate("/dashboard");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -185,7 +203,7 @@ const Setup = () => {
                 id="date"
                 // value 綁定「快取」的值，按下 Enter 會傳給「正確」的State
                 value={currentDate}
-                onChange={(e) => setCurrentDate((e.target.value))}
+                onChange={(e) => setCurrentDate(e.target.value)}
               />
             </div>
             <div className="weight">
