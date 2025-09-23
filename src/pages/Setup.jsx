@@ -181,7 +181,9 @@ const Setup = () => {
             <div
               className="progress"
               style={{
-                width: `calc(${((weightStep - 1) / (weightCount - 1)) * 93}% )`,
+                width: `calc(${
+                  ((weightStep - 1) / (weightCount - 1)) * 100
+                }% )`,
               }}
             ></div>
             <div className={`circle ${weightStep >= 1 ? "active" : ""}`}>1</div>
