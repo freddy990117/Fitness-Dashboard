@@ -3,13 +3,19 @@ import { Dashboard } from "../pages/Dashboard";
 import { Login } from "../pages/Login";
 import Setup from "../pages/Setup";
 
-const Router = () => {
+const Router = ({ user }) => {
   return (
     <Routes>
-      <Route path="/login" element={<Login />} />
-      <Route path="/setup" element={<Setup />} />
-      <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="*" element={<Login />} />
+      {/* 沒有登入導入到 Login 畫面 */}
+      {!user ? (
+        <Route path="/login" element={<Login />} />
+      ) : (
+        <>
+          <Route path="/setup" element={<Setup />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="*" element={<Login />} />
+        </>
+      )}
     </Routes>
   );
 };

@@ -111,11 +111,6 @@ const Setup = () => {
       setError(false);
       // 表單完成
       setEdit("Finish");
-      // // 上傳資料到雲端上
-      // saveToFirestore(user, showDataOnDashboard, data);
-      // // 到 formStep 3 完成，上傳資料後導覽到 dashboard
-      // navigate("/dashboard");
-
       const user = auth.currentUser; //取得登入的使用者
       if (user && user.uid) {
         saveToFirestore(user.uid, showDataOnDashboard, data);
