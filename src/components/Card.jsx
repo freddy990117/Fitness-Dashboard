@@ -66,19 +66,19 @@ const Card = () => {
   const proteinRef = useRef(null);
   // 將最新的 weight data 即時更新到 fireStore 上
   const updateWeight = async (newWeight) => {
-    await updateDoc(doc(db, "users", user.id), {
+    await updateDoc(doc(db, "users", user.uid), {
       "dashboard.weight": newWeight,
     });
   };
   // 將最新的 workoutCount data 即時更新到 fireStore 上
   const updateWorkoutTime = async (newWorkoutTime) => {
-    await updateDoc(doc(db, "users", user.id), {
+    await updateDoc(doc(db, "users", user.uid), {
       "dashboard.workoutCount": newWorkoutTime,
     });
   };
   // 將最新的 proteinPercent data 即時更新到 fireStore 上
   const updateProtein = async (newProtein) => {
-    await updateDoc(doc(db, "users", user.id), {
+    await updateDoc(doc(db, "users", user.uid), {
       "dashboard.proteinPercent": newProtein,
     });
   };
