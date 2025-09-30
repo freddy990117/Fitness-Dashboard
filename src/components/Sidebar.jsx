@@ -9,7 +9,19 @@ import {
   faGear,
   faRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
+import { signOut } from "firebase/auth";
+import { auth } from "../services/firebase";
+
 const Sidebar = () => {
+  // 登出事件
+  const handleLayout = async () => {
+    try {
+      await signOut(auth);
+      console.log("登出完畢");
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="sidebar-wrapper">
       <div className="sidebar-header">
@@ -40,14 +52,13 @@ const Sidebar = () => {
         <h3 className="disable">
           <FontAwesomeIcon icon={faGear} className="awesome-icon" />
           <a href="#">
-            {" "}
             Setting <br />
             {/* (Comming Soon...) */}
           </a>
         </h3>
         <h3>
           <FontAwesomeIcon icon={faRightFromBracket} className="awesome-icon" />
-          <a href="#"> Layout</a>
+          <button onClick={handleLayout}>Layout</button>
         </h3>
       </div>
     </div>
