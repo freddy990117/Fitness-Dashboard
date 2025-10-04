@@ -11,13 +11,15 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { signOut } from "firebase/auth";
 import { auth } from "../services/firebase";
-
+import { useNavigate } from "react-router-dom";
 const Sidebar = () => {
+  const navigate = useNavigate();
   // 登出事件
   const handleLayout = async () => {
     try {
       await signOut(auth);
       console.log("登出完畢");
+      navigate("/login");
     } catch (error) {
       console.log(error);
     }
