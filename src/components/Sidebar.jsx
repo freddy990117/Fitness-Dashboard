@@ -28,7 +28,7 @@ const Sidebar = () => {
     <div className="sidebar-wrapper">
       <div className="sidebar-header">
         <FontAwesomeIcon icon={faDumbbell} className="header-awesome" />
-        <h2>User1</h2>
+        <h2>User</h2>
       </div>
       <div className="sidebar-menu">
         <h3>

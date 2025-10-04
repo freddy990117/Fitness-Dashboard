@@ -16,7 +16,6 @@ const Setup = () => {
   const [currentDate, setCurrentDate] = useState("");
   // !如果輸入框沒有值時觸發
   const [error, setError] = useState(false);
-  const [edit, setEdit] = useState(false); // 如果變成 true 代表全部編輯完成，會傳送到 fireStore 的狀態
   const [formStep, setFormStep] = useState(1); // 整體 form 的下一步狀態 （總共三步）
   const [weightStep, setWeightStep] = useState(1); // 體重的下一步狀態 （總共七步）
   const weightCount = 7;
@@ -24,6 +23,8 @@ const Setup = () => {
   // 綁定按下 Enter 執行下一個表單的行為 (ref) + 當 formStep 改變時執行
   const workoutRef = useRef(null);
   const proteinRef = useRef(null);
+  const setEdit = false; // 如果變成 true 代表全部編輯完成
+
   // 取最後一個值出來給畫面呈現使用 (Weight)
   const lastWeight =
     inputWeight.length > 0 ? inputWeight[inputWeight.length - 1] : null;
@@ -110,7 +111,6 @@ const Setup = () => {
       }
       setError(false);
       // 表單完成
-      setEdit("Finish");
       const user = auth.currentUser; //取得登入的使用者
       if (user && user.uid) {
         saveToFirestore(user.uid, showDataOnDashboard, data);
