@@ -9,12 +9,26 @@ import {
   faGear,
   faRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
+import { signOut } from "firebase/auth";
+import { auth } from "../services/firebase";
+import { useNavigate } from "react-router-dom";
 const Sidebar = () => {
+  const navigate = useNavigate();
+  // 登出事件
+  const handleLayout = async () => {
+    try {
+      await signOut(auth);
+      console.log("登出完畢");
+      navigate("/login");
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="sidebar-wrapper">
       <div className="sidebar-header">
         <FontAwesomeIcon icon={faDumbbell} className="header-awesome" />
-        <h2>User1</h2>
+        <h2>User</h2>
       </div>
       <div className="sidebar-menu">
         <h3>
@@ -40,14 +54,13 @@ const Sidebar = () => {
         <h3 className="disable">
           <FontAwesomeIcon icon={faGear} className="awesome-icon" />
           <a href="#">
-            {" "}
             Setting <br />
             {/* (Comming Soon...) */}
           </a>
         </h3>
         <h3>
           <FontAwesomeIcon icon={faRightFromBracket} className="awesome-icon" />
-          <a href="#"> Layout</a>
+          <button onClick={handleLayout}>Layout</button>
         </h3>
       </div>
     </div>

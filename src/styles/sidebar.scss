@@ -31,10 +31,24 @@
         color: #dff6ff;
         text-decoration: none;
       }
+      button {
+        color: #dff6ff;
+        text-decoration: none;
+        background-color: transparent;
+        border: none;
+        font-size: 1.6rem;
+        padding: 0 0.3rem;
+        cursor: pointer;
+        font-weight: bolder;
+      }
+
       //變更顏色
       &:hover {
         color: #47b5ff;
         a {
+          color: #47b5ff;
+        }
+        button {
           color: #47b5ff;
         }
       }

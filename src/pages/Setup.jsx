@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import "../styles/setup.css";
 import { doc, setDoc } from "firebase/firestore";
-import { db } from "../services/firebase";
+import { db, auth } from "../services/firebase";
 import { useNavigate } from "react-router-dom";
 const Setup = () => {
   // 加入導覽列
@@ -16,7 +16,6 @@ const Setup = () => {
   const [currentDate, setCurrentDate] = useState("");
   // !如果輸入框沒有值時觸發
   const [error, setError] = useState(false);
-  const [edit, setEdit] = useState(false); // 如果變成 true 代表全部編輯完成，會傳送到 fireStore 的狀態
   const [formStep, setFormStep] = useState(1); // 整體 form 的下一步狀態 （總共三步）
   const [weightStep, setWeightStep] = useState(1); // 體重的下一步狀態 （總共七步）
   const weightCount = 7;
@@ -24,6 +23,8 @@ const Setup = () => {
   // 綁定按下 Enter 執行下一個表單的行為 (ref) + 當 formStep 改變時執行
   const workoutRef = useRef(null);
   const proteinRef = useRef(null);
+  const setEdit = false; // 如果變成 true 代表全部編輯完成
+
   // 取最後一個值出來給畫面呈現使用 (Weight)
   const lastWeight =
     inputWeight.length > 0 ? inputWeight[inputWeight.length - 1] : null;
@@ -41,14 +42,21 @@ const Setup = () => {
   };
 
   // 當表單都輸入完畢後，將資料更新到 fireStore 上
-  const saveToFirestore = async (userid, showDataOnDashboard, data) => {
+  const saveToFirestore = async (uid, showDataOnDashboard, data) => {
     try {
-      // 存放使用者的資料，setDoc 覆蓋原本的值
-      await setDoc(doc(db, "users", userid), {
-        dashboard: showDataOnDashboard, // 給 Dashboard 顯示
-        history: data, // 上傳七天份的資料給 fireStore（後續給 Chart 引用）
-        createdAt: new Date().toISOString(),
-      });
+      const docRef = doc(db, "users", uid);
+      await setDoc(
+        docRef,
+        {
+          ...data,
+          users: uid,
+          dashboard: showDataOnDashboard,
+          history: data,
+          createdAt: new Date().toISOString(),
+          isSetupComplete: true, // 這邊順便更新狀態
+        },
+        { merge: true }
+      );
       console.log("Firestore 更新成功！");
     } catch (error) {
       console.error("上傳失敗", error);
@@ -103,11 +111,13 @@ const Setup = () => {
       }
       setError(false);
       // 表單完成
-      setEdit("Finish");
-      // 上傳資料到雲端上
-      saveToFirestore("user1", showDataOnDashboard, data);
-      // 到 formStep 3 完成，上傳資料後導覽到 dashboard
-      navigate("/dashboard");
+      const user = auth.currentUser; //取得登入的使用者
+      if (user && user.uid) {
+        saveToFirestore(user.uid, showDataOnDashboard, data);
+        navigate("/dashboard");
+      } else {
+        console.error("沒有登入使用者，無法儲存資料");
+      }
     }
   };
 
@@ -123,15 +133,18 @@ const Setup = () => {
 
   // 按下「儲存」的事件
   const handleSave = async () => {
+    const user = auth.currentUser;
     if (!inputProtein || !inputWorkout || inputWeight.length === 0) {
       setError(true);
       return;
     }
     setError(false);
-    setEdit("Finish");
+    setEdit(true); // 完成設定！！
     try {
-      await saveToFirestore("user1", showDataOnDashboard, data);
-      navigate("/dashboard");
+      if (user.uid) {
+        await saveToFirestore(user.uid, showDataOnDashboard, data);
+        navigate("/dashboard");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -163,7 +176,9 @@ const Setup = () => {
             <div
               className="progress"
               style={{
-                width: `calc(${((weightStep - 1) / (weightCount - 1)) * 93}% )`,
+                width: `calc(${
+                  ((weightStep - 1) / (weightCount - 1)) * 100
+                }% )`,
               }}
             ></div>
             <div className={`circle ${weightStep >= 1 ? "active" : ""}`}>1</div>
@@ -185,7 +200,7 @@ const Setup = () => {
                 id="date"
                 // value 綁定「快取」的值，按下 Enter 會傳給「正確」的State
                 value={currentDate}
-                onChange={(e) => setCurrentDate((e.target.value))}
+                onChange={(e) => setCurrentDate(e.target.value)}
               />
             </div>
             <div className="weight">

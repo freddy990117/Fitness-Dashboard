@@ -34,10 +34,23 @@
   color: #dff6ff;
   text-decoration: none;
 }
+.sidebar-wrapper .sidebar-menu h3 button {
+  color: #dff6ff;
+  text-decoration: none;
+  background-color: transparent;
+  border: none;
+  font-size: 1.6rem;
+  padding: 0 0.3rem;
+  cursor: pointer;
+  font-weight: bolder;
+}
 .sidebar-wrapper .sidebar-menu h3:hover {
   color: #47b5ff;
 }
 .sidebar-wrapper .sidebar-menu h3:hover a {
+  color: #47b5ff;
+}
+.sidebar-wrapper .sidebar-menu h3:hover button {
   color: #47b5ff;
 }
 .sidebar-wrapper .sidebar-menu h3.disable {

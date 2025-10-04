@@ -9,9 +9,30 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 // import FireStore
 import { doc, onSnapshot, updateDoc } from "firebase/firestore";
-import { db } from "../services/firebase";
+import { db, auth } from "../services/firebase";
 
 const Card = () => {
+  // FireStore Database
+  // 先將 Database 的資料預設為 0，防止錯誤訊息跳出 (null)
+  const [fitnessData, setFitnessData] = useState({
+    weight: 0,
+    proteinPercent: 0,
+    workoutCount: 0,
+  });
+  // 提供給 chart 的 data
+  const [chartData, setChartData] = useState({
+    inputWeight: [],
+    inputDate: [],
+  });
+  // 放置快取的資料，當按下 save 時在進行變更
+  const [editWeight, setEditWeight] = useState(null);
+  const [editWorkout, setEditWorkout] = useState(null);
+  const [editProtein, setEditProtein] = useState(null);
+  // 設定編輯蛋白質的狀態
+  const [isEditProtein, setIsEditProtein] = useState(false);
+  // 設定點選 Modify btn 後會自動跳到 input 視窗的 State
+  const proteinRef = useRef(null);
+
   // HealthTips
   const healthTips = [
     "每天至少喝足 2000c.c 水，維持身體代謝與健康。",
@@ -35,55 +56,39 @@ const Card = () => {
     "適量拉伸提升柔軟度，減少日常不適與僵硬。",
     "避免熬夜有助內分泌穩定，提升訓練效果。",
   ];
+
   const randomTips = useRef(
     healthTips[Math.floor(Math.random() * healthTips.length)]
   );
 
-  // FireStore Database
-  // 先將 Database 的資料預設為 0，防止錯誤訊息跳出 (null)
-  const [fitnessData, setFitnessData] = useState({
-    weight: 0,
-    proteinPercent: 0,
-    workoutCount: 0,
-  });
-  // 提供給 chart 的 data
-  const [chartData, setChartData] = useState({
-    inputWeight: [],
-    inputDate: [],
-  });
-  // 放置快取的資料，當按下 save 時在進行變更
-  const [editWeight, setEditWeight] = useState(null);
-  const [editWorkout, setEditWorkout] = useState(null);
-  const [editProtein, setEditProtein] = useState(null);
-  // 設定編輯蛋白質的狀態
-  const [isEditProtein, setIsEditProtein] = useState(false);
-  // 設定點選 Modify btn 後會自動跳到 input 視窗的 State
-  const proteinRef = useRef(null);
+  const user = auth.currentUser;
+
   // 將最新的 weight data 即時更新到 fireStore 上
   const updateWeight = async (newWeight) => {
-    await updateDoc(doc(db, "users", "user1"), {
+    await updateDoc(doc(db, "users", user.uid), {
       "dashboard.weight": newWeight,
     });
   };
   // 將最新的 workoutCount data 即時更新到 fireStore 上
   const updateWorkoutTime = async (newWorkoutTime) => {
-    await updateDoc(doc(db, "users", "user1"), {
+    await updateDoc(doc(db, "users", user.uid), {
       "dashboard.workoutCount": newWorkoutTime,
     });
   };
   // 將最新的 proteinPercent data 即時更新到 fireStore 上
   const updateProtein = async (newProtein) => {
-    await updateDoc(doc(db, "users", "user1"), {
+    await updateDoc(doc(db, "users", user.uid), {
       "dashboard.proteinPercent": newProtein,
     });
   };
 
   // 在畫面 Render 後執行，使用 onSnapshot 監聽 Firestore 的變化，自動推送資料至 state，因此無需指定 dependency
   useEffect(() => {
+    if (!user) return;
     // onSnapshot 是官方提供的函式，用於「即時」監聽資料庫的變化，第一個參數是「指定要使用哪一筆資料」
     const unsub = onSnapshot(
-      // 取得的資料是 users (Collection) 內 user1 (Document) 的 Database
-      doc(db, "users", "user1"),
+      // 取得的資料是 users (Collection) 內 user.id (Document) 的 Database
+      doc(db, "users", user.uid),
       // onSnapshot 第二個參數是一個 callBack fn
       (doc) => {
         // exists 檢查資料庫中是否有這筆資料
@@ -97,7 +102,7 @@ const Card = () => {
       }
     );
     return () => unsub();
-  }, []);
+  }, [user]);
 
   return (
     <section className="card-container">

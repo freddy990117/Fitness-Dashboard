@@ -4,13 +4,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: antiquewhite;
+  background-color: #f0f6fb;
 }
 .setup .form-setting {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: lightgreen;
+  background-color: #1e88e5;
   width: 60%;
   border-radius: 20px;
   position: relative;
@@ -29,7 +29,7 @@
   content: "";
   position: absolute;
   width: 92%;
-  background-color: #e0e0e0;
+  background-color: #ffffff;
   height: 5px;
   left: 4%;
 }
@@ -39,24 +39,27 @@
   height: 5px;
   left: 4%;
   transition: 0.3s ease;
-  background-color: green;
+  background-color: #42a5f5;
 }
 .setup .form-setting .step-bar .step-circle {
   width: 30px;
   height: 30px;
-  border: 3px solid #e0e0e0;
+  border: 3px solid #d6d6d6;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: 0.3s ease;
+  z-index: 2;
+  background-color: #f9f9f9;
 }
 .setup .form-setting .step-bar .step-circle.active {
-  border: 3px solid green;
+  border-color: #1e88e5;
+  background-color: #42a5f5;
 }
 .setup .form-setting .form {
   border-radius: 0 0 20px 20px;
-  background-color: lightpink;
+  background-color: #bbdefb;
   height: 50vh;
   width: 100%;
   display: flex;
@@ -79,6 +82,7 @@
   gap: 3rem;
   margin: 1rem 0;
   font-size: 1.2rem;
+  z-index: 0;
 }
 .setup .form-setting .weight-input .weight-bar::before {
   content: "";
@@ -87,17 +91,19 @@
   left: 3.7%;
   background-color: #e0e0e0;
   height: 5px;
+  z-index: 0;
 }
 .setup .form-setting .weight-input .weight-bar .progress {
+  z-index: 1;
   position: absolute;
   height: 5px;
   transition: 0.3s ease;
-  left: 3.7%;
   top: 50%;
-  background-color: green;
+  background-color: #42a5f5;
   transform: translateY(-50%);
 }
 .setup .form-setting .weight-input .weight-bar .circle {
+  z-index: 2;
   width: 30px;
   height: 30px;
   border: 3px solid #e0e0e0;
@@ -106,15 +112,16 @@
   align-items: center;
   justify-content: center;
   transition: 0.3s ease;
+  background-color: #f9f9f9;
 }
 .setup .form-setting .weight-input .weight-bar .circle.active {
-  border: 3px solid green;
+  border-color: #1e88e5;
+  background-color: #42a5f5;
 }
 .setup .form-setting .weight-input .form-input {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: wheat;
   width: 50%;
   height: 50%;
 }
@@ -151,7 +158,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: wheat;
   height: 50vh;
   width: 100%;
 }
@@ -190,7 +196,10 @@
 }
 .setup .input-btn .save.active {
   display: block;
-  background-color: green;
+  background-color: #42a5f5;
+}
+.setup .input-btn .save:hover {
+  background-color: #388e3c;
 }
 .setup .input-btn .next.disable {
   display: none;
