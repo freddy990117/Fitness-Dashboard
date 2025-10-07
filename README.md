@@ -19,20 +19,18 @@
 - Email: user1@gmail.com / user1@test.com
 - Password: 123456
 
-👉 開發中...... <!--[Fitness Dashboard Demo]() 這裡之後補上網址 -->
-
 ---
 
 ## 🛠️ 技術使用
 
-| 技術         | 說明                               |
-| ------------ | ---------------------------------- |
-| React        | 前端框架，建構元件化 SPA 架構      |
-| Firebase     | Auth 驗證 / Firestore 雲端資料儲存 |
-| React Router | 路由管理（登入 / 首頁 / 儀錶板）   |
-| Chart.js     | 視覺化圖表（體重、、訓練次數）     |
-| SCSS         | RWD 響應式樣式與動畫效果           |
-| Git / GitHub | 版本管理與部署                     |
+| 技術         | 說明                                   |
+| ------------ | -------------------------------------- |
+| React        | 前端框架，元件化 SPA 架構              |
+| Firebase     | Auth 驗證 / Firestore 雲端資料儲存     |
+| React Router | 路由管理（登入 / 設定 / 儀錶板）       |
+| Chart.js     | 視覺化圖表（體重趨勢）                 |
+| SCSS         | RWD 響應式樣式與動畫效果 （⏳ 製作中） |
+| Git / GitHub | 版本管理與部署、GitFlow 命名           |
 
 ---
 
@@ -65,6 +63,10 @@ src
 ---
 
 ## 📸 預覽畫面
+
+![Demo](/public/Demo.gif)
+
+[▶️ 點我看完整的展示影片](https://youtu.be/ELcEHcztUGA)
 
 ### 🔐 登入 / 設定 / 儀錶板
 
