@@ -1,0 +1,71 @@
+.sidebar-wrapper {
+  background-color: #0f3d5f;
+  color: #dff6ff;
+  min-width: 19rem;
+  min-height: 100%;
+  .sidebar-header {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding: 1rem;
+    .header-awesome {
+      margin: 2rem 0 0 2rem;
+      margin-top: 2rem;
+      font-size: 2rem;
+      padding: 1rem;
+      background-color: #47b5ff;
+      border-radius: 50%;
+    }
+    h2 {
+      margin: 2rem 0 0 1.5rem;
+    }
+  }
+  .sidebar-menu {
+    height: 100%;
+    margin: 3rem 0 0 1rem;
+    margin-top: 3rem;
+    h3 {
+      padding: 1.8rem;
+      font-size: 1.6rem;
+      a {
+        color: #dff6ff;
+        text-decoration: none;
+      }
+      button {
+        color: #dff6ff;
+        text-decoration: none;
+        background-color: transparent;
+        border: none;
+        font-size: 1.6rem;
+        padding: 0 0.3rem;
+        cursor: pointer;
+        font-weight: bolder;
+      }
+
+      //變更顏色
+      &:hover {
+        color: #47b5ff;
+        a {
+          color: #47b5ff;
+        }
+        button {
+          color: #47b5ff;
+        }
+      }
+      &.disable {
+        opacity: 0.5;
+        cursor: not-allowed;
+        :hover {
+          cursor: not-allowed;
+        }
+      }
+    }
+
+    .line {
+      border: 1px solid #1e5a7d;
+      margin: 2rem 0;
+      width: 122%;
+      transform: translateX(-18%);
+    }
+  }
+}

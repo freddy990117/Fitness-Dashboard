@@ -6,29 +6,31 @@
 
 ✅ 使用者可以：
 
-- 註冊 / 登入帳號
-- 新增、編輯、刪除健身紀錄
-- 儲存體重、飲食等個人數據
-- 視覺化統計（體重趨勢 / 飲食熱量 / 訓練次數）
+- 登入、登出帳號
+- 新增、編輯、儲存紀錄
+- 視覺化圖表（體重趨勢）
 
 ---
 
 ## 🚀 Demo 網址
 
-👉 開發中...... <!--[Fitness Dashboard Demo]() 這裡之後補上網址 -->
+目前專案進設定「固定帳號」登入，尚未開放註冊功能。
+
+- Email: user1@gmail.com / user1@test.com
+- Password: 123456
 
 ---
 
 ## 🛠️ 技術使用
 
-| 技術         | 說明                               |
-| ------------ | ---------------------------------- |
-| React        | 前端框架，建構元件化 SPA 架構      |
-| Firebase     | Auth 驗證 / Firestore 雲端資料儲存 |
-| React Router | 路由管理（登入 / 首頁 / 個人頁）   |
-| Chart.js     | 視覺化圖表（體重、熱量、訓練次數） |
-| SCSS         | RWD 響應式樣式與動畫效果           |
-| Git / GitHub | 版本管理與部署                     |
+| 技術         | 說明                                   |
+| ------------ | -------------------------------------- |
+| React        | 前端框架，元件化 SPA 架構              |
+| Firebase     | Auth 驗證 / Firestore 雲端資料儲存     |
+| React Router | 路由管理（登入 / 設定 / 儀錶板）       |
+| Chart.js     | 視覺化圖表（體重趨勢）                 |
+| SCSS         | RWD 響應式樣式與動畫效果 （⏳ 製作中） |
+| Git / GitHub | 版本管理與部署、GitFlow 命名           |
 
 ---
 
@@ -40,16 +42,20 @@ src
 │   ├── Card.jsx
 │   ├── Chart.jsx
 │   └── Sidebar.jsx
-├── hooks
-│   └── useAuth.js
 ├── pages
 │   ├── Dashboard.jsx
 │   └── Login.jsx
+│   └── Setup.jsx
+├── Routes
+│   └── Router.jsx
 ├── services
-│   └── firebase.js
+│   └── firebase.jss
 ├── styles
 │   ├── index.scss
 │   └── login.scss
+│   └── card.scss
+│   └── setup.scss
+│   └── sidebar.scss
 ├── App.jsx
 └── main.jsx
 ```
@@ -58,25 +64,35 @@ src
 
 ## 📸 預覽畫面
 
-### 🔐 登入 / 註冊頁（Login Page）
+![Demo](/public/Demo.gif)
 
-使用者可透過 Email / Password 註冊或登入，登入後導向 Dashboard。  
-具備基本的「記住我」、忘記密碼等提示，符合一般使用者習慣的登入體驗。
+[▶️ 點我看完整的展示影片](https://youtu.be/ELcEHcztUGA)
+
+### 🔐 登入 / 設定 / 儀錶板
+
+進入時導向 Login Page
 
 ![Login Page](./public/assets/Login-intro.png)
 
+登入後進入 Setup Page
+
+![Setup Page](./public/assets/Setup.png)
+
+輸入完成後進入 Dashboard Page
+
+![Dashboard Page](./public/assets/Dashboard.png)
+
 ---
 
-## 🔑 功能說明（🧑🏻‍💻 開發中....）
+## 🔑 功能說明（🧑🏻‍💻 RWD 開發中....）
 
-| 功能                           | 狀態      |
-| ------------------------------ | --------- |
-| 註冊 / 登入 / 登出             | ✅ 已完成 |
-| 健身紀錄（新增 / 編輯 / 刪除） | ⏳ 製作中 |
-| 飲食紀錄（新增 / 編輯 / 刪除） | ⏳ 製作中 |
-| 個人資料管理                   | ⏳ 製作中 |
-| 體重、熱量統計圖表             | ⏳ 製作中 |
-| 手機 / 桌機 RWD 完整支援       | ⏳ 製作中 |
+| 功能                             | 狀態      |
+| -------------------------------- | --------- |
+| 登入 / 設定 / 登出               | ✅ 已完成 |
+| 健身次數（新增 / 編輯 / 刪除）   | ✅ 已完成 |
+| 蛋白質攝取（新增 / 編輯 / 刪除） | ✅ 已完成 |
+| 體重圖表                         | ✅ 已完成 |
+| 平板 / 手機 RWD 支援             | ⏳ 製作中 |
 
 ---
 
@@ -97,10 +113,12 @@ npm run dev
 
 ## 🛠 開發者筆記
 
-- 強化對 Jest、Firebase Auth / Firestore 實戰應用能力
-- 優化元件化思維、狀態管理、路由管理
-- 從 UI / UX 出發，設計更貼近健身使用情境的視覺呈現
+- 強化對 Firebase Auth / Firestore 實戰應用能力
+- 元件化思維、狀態管理、路由管理
+- 從 UI / UX 出發，設計貼近健身族群的圖表呈現
 - 使用 Git Flow 流程規劃，確保開發穩定性與維護性
+
+- commit 前使用 npm run lint，確保無語法與格式錯誤
 
 ---
 
