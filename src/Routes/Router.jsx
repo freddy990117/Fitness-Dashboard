@@ -8,7 +8,7 @@ const Router = ({ user }) => {
     <Routes>
       {/* 沒有登入導入到 Login 畫面 */}
       {!user ? (
-        <Route path="/login" element={<Login />} />
+        <Route path="*" element={<Login />} />
       ) : (
         <>
           <Route path="/setup" element={<Setup />} />

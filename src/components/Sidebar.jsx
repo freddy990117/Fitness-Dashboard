@@ -54,6 +54,7 @@ const Sidebar = () => {
         <h3 className="disable">
           <FontAwesomeIcon icon={faGear} className="awesome-icon" />
           <a href="#">
+            {" "}
             Setting <br />
             {/* (Comming Soon...) */}
           </a>
